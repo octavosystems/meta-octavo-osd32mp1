@@ -1,41 +1,90 @@
-This README file contains information on the contents of the meta-octavo layer.
+This README file contains information on the contents of the meta-octavo-osd32mp1 layer.
 
 Please see the corresponding sections below for details.
 
 Dependencies
 ============
 
-  URI: <first dependency>
-  branch: <branch name>
+  URI: https://github.com/STMicroelectronics/meta-st-stm32mp
+  branch: dunfell
 
-  URI: <second dependency>
-  branch: <branch name>
+  URI: https://github.com/STMicroelectronics/meta-st-openstlinux
+  branch: dunfell
 
-  .
-  .
-  .
+  URI: https://github.com/STMicroelectronics/meta-st-scripts
+  branch: dunfell
+  
+  URI: https://github.com/STMicroelectronics/meta-st-scripts
+  branch: dunfell
+  
+  URI: https://github.com/openembedded/openembedded-core.git
+  branch: dunfell
 
+  URI: git://github.com/openembedded/meta-openembedded.git
+  branch: dunfell
+  
+  URI: https://github.com/meta-qt5/meta-qt5
+  branch: dunfell
+
+  URI: https://github.com/openembedded/bitbake.git
+  branch: dunfell
+  
 Patches
 =======
 
-Please submit any patches against the meta-octavo layer to the xxxx mailing list (xxxx@zzzz.org)
-and cc: the maintainer:
+Please submit any patches against the meta-octavo-osd32mp1 layer here
+and cc: the maintainer:neeraj.dantu(at)octavosystems.com
 
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
+Maintainer: Neeraj Dantu <dantufug14105(at)gmail.com>
 
-Table of Contents
+GETTING STARTED
 =================
 
-  I. Adding the meta-octavo layer to your build
- II. Misc
-
-
 I. Adding the meta-octavo layer to your build
-=================================================
-
-Run 'bitbake-layers add-layer meta-octavo'
+  Get Distribution Package: 
+  - repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-5.10-dunfell-mp1-21-03-31
+  - repo sync
+  
+  Initialize environment
+  - DISTRO=openstlinux-weston MACHINE=stm32mp1 source layers/meta-st/scripts/envsetup.sh
+  
+  Clone this repo
+  - git clone https://github.com/octavosystems/meta-octavo-osd32mp1/
+  
+  Add layer to your build environment
+  - bitbake-layers add-layer <PATH TO THIS REPO>
+  
+  Change MACHINE in <BUILD_FOLDER>/conf/local.conf
+  - MACHINE = "osd32mp1-brk"
 
 II. Misc
-========
+  Generate image
+  - bitbake octavo-image-weston
 
---- replace with specific information about the meta-octavo layer ---
+III. Program the board
+  Currently, OSD32MP1-BRK is supported. You will need Cube Programmer(>v2.4).
+  - cd <BUILD_FOLDER>/tmp-glibc/deploy/images/osd32mp1-brk
+  - Set boot mode to USB
+  - Make sure you have an SD card in the SD card slot to program
+  - Connect the board to Host computer
+  - STM32_Programmer_CLI -l USB
+ 
+  This should provide board information:
+     -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.5.0                  
+      -------------------------------------------------------------------
+
+=====  DFU Interface   =====
+
+Total number of available STM32 device in DFU mode: 1
+
+  Device Index           : USB1
+  USB Bus Number         : 003
+  USB Address Number     : 003
+  Product ID             : DFU in HS Mode @Device ID /0x500, @Revision ID /0x0000
+  Serial number          : 002500403239511337383434
+  Firmware version       : 0x0110
+  Device ID              : 0x0500
+
+  Program the board
+  - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-brk-trusted.tsv
