@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OSD32MP1-BRK LED Blink Demo</title>
+</head>
+<body>
+    <h1>OSD32MP1-BRK LED Web Example</h1>
+    <p>Click on the buttons next to the cooresponding LED to control it. <br />
+        <em>Note: Flashing could take a few seconds to start and stop.</em></p>
+    <form action="/" method="post">
+        <table>
+            <tr>
+                <td>D1 Green</td>
+                <td><div id="green" class="{d1g_status}">{d1g_status}:</td>
+                <td><input name="d1g" type="submit" value="Off" {d1g_disabled[0]}></td>
+                <td><input name="d1g" type="submit" value="On" {d1g_disabled[1]}></td>
+                <td><input name="d1g" type="submit" value="Flash" {d1g_disabled[2]}></td>
+            </tr>
+            <tr>
+                <td>D1 Red</td>
+                <td>{d1r_status}:</td>
+                <td><input name="d1r" type="submit" value="Off" {d1r_disabled[0]}></td>
+                <td><input name="d1r" type="submit" value="On" {d1r_disabled[1]}> </td>
+                <td><input name="d1r" type="submit" value="Flash" {d1r_disabled[2]}></td>
+            </tr>
+            <tr>
+                <td>D2 Green</td>
+                <td>{d2g_status}:</td>
+                <td><input name="d2g" type="submit" value="Off" {d2g_disabled[0]}></td>
+                <td><input name="d2g" type="submit" value="On" {d2g_disabled[1]}></td>
+                <td><input name="d2g" type="submit" value="Flash" {d2g_disabled[2]}></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
