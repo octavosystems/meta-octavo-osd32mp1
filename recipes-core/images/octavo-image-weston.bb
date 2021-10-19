@@ -13,9 +13,6 @@ USERFS_PARTITION_SIZE = "128000"
 # Install nano editor
 IMAGE_INSTALL += "nano"
 
-# Set root password
-inherit extrausers
-EXTRA_USERS_PARAMS = "useradd -P \\\$1\\\$AYKx1FFk\\\$dZYB4ODkN8nFnuHL7XPJP0 root;"
 
 # Add native compile tools
 IMAGE_INSTALL += "packagegroup-core-buildessential"
