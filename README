@@ -33,11 +33,21 @@ Patches
 =======
 
 Please submit any patches against the meta-octavo-osd32mp1 layer here
-and cc: the maintainer:neeraj.dantu(at)octavosystems.com
 
 Maintainer: Neeraj Dantu <dantufug14105(at)gmail.com>
 
-GETTING STARTED
+Prerequisites
+=================
+sudo apt-get update
+sudo apt-get install -y git curl gpg python-is-python3
+sudo apt-get install -y build-essential chrpath diffstat gawk gcc-multilib libegl1-mesa libgmp-dev libmpc-dev libsdl1.2-dev libssl-dev pylint python3-git python3-jinja2 python3-pip socat texinfo xterm
+sudo snap install git-repo
+
+- Please make sure you have at least 50GB of free disk space
+- The layer was tested on Ubuntu 18.04 and Ubuntu 20.04
+- Building an image may take a while based on machine capabilities
+
+Getting Started
 =================
 
 I. Adding the meta-octavo layer to your build
@@ -62,7 +72,8 @@ II. Misc
   - bitbake octavo-image-weston
 
 III. Program the board
-  Currently, OSD32MP1-BRK is supported. You will need Cube Programmer(>v2.4).
+  Currently, OSD32MP1-BRK is supported. You will need Cube Programmer(>v2.4): https://www.st.com/en/development-tools/stm32cubeprog.html.
+  For Linux:
   - cd <BUILD_FOLDER>/tmp-glibc/deploy/images/osd32mp1-brk
   - Set boot mode to USB
   - Make sure you have an SD card in the SD card slot to program
