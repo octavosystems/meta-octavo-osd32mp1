@@ -99,3 +99,14 @@ Total number of available STM32 device in DFU mode: 1
 
   Program the board
   - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-brk-trusted.tsv
+  
+  To Flash on Windows, use cp_image_files.py:
+  Usage: 
+    -b <Path to build directory>
+    -d <Path to destination directory>
+  - When copying files from Linux to Windows, there are no symbolic links so you have to rename the .ext4 files to remove anything between "osd32mp1-brk" and ".ext4"
+  
+  
+Known Issues
+=================
+repo init error: https://stackoverflow.com/questions/65193998/syntaxerror-invalid-syntax-to-repo-init-in-the-aosp-code
