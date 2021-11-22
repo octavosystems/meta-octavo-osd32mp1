@@ -1,7 +1,7 @@
-From e8beb689b77a5ff9e10e1d5083d1f458a81a1fab Mon Sep 17 00:00:00 2001
-From: "neeraj.dantu" <neeraj.dantu@octavosystems.com>
-Date: Tue, 19 Oct 2021 16:11:44 -0500
-Subject: [PATCH] Add OSD32MP1-BRK build config
+From 98cdd782d5a5453268a9b44150a237e57002ff99 Mon Sep 17 00:00:00 2001
+From: "neeraj.dantu" <dantuguf14105@gmail.com>
+Date: Sun, 21 Nov 2021 23:31:02 -0600
+Subject: [PATCH 2/3] Add OSD32MP1-BRK build config
 
 ---
  arch/arm/mach-stm32mp/Kconfig          |  10 +-
@@ -18,7 +18,7 @@ Subject: [PATCH] Add OSD32MP1-BRK build config
  create mode 100644 configs/osd32mp1_brk_trusted_defconfig
 
 diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index af0246d031..e6d7993533 100644
+index 44bfac9000..006855acad 100644
 --- a/arch/arm/mach-stm32mp/Kconfig
 +++ b/arch/arm/mach-stm32mp/Kconfig
 @@ -92,6 +92,14 @@ config TARGET_DH_STM32MP1_PDK2
@@ -36,7 +36,7 @@ index af0246d031..e6d7993533 100644
  endchoice
  
  config SYS_TEXT_BASE
-@@ -170,5 +178,5 @@ endif
+@@ -172,5 +180,5 @@ endif
  source "arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig"
  source "board/st/stm32mp1/Kconfig"
  source "board/dhelectronics/dh_stm32mp1/Kconfig"

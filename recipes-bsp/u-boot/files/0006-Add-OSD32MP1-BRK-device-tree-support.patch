@@ -1,7 +1,7 @@
-From 81f65aa95ec099205371f0b2ad9982b6b0e41ba5 Mon Sep 17 00:00:00 2001
-From: "neeraj.dantu" <neeraj.dantu@octavosystems.com>
-Date: Tue, 19 Oct 2021 16:02:01 -0500
-Subject: [PATCH] Add OSD32MP1-BRK device tree support
+From aa86f57348a2030704697b82716d5b5d17fd468b Mon Sep 17 00:00:00 2001
+From: "neeraj.dantu" <dantuguf14105@gmail.com>
+Date: Sun, 21 Nov 2021 23:26:05 -0600
+Subject: [PATCH 1/3] Add OSD32MP1-BRK device tree support
 
 ---
  arch/arm/dts/Makefile                         |    3 +-

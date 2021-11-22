@@ -1,7 +1,7 @@
-From b673e5687d8692f54dc2529d1787d1dc368cd5ee Mon Sep 17 00:00:00 2001
-From: "neeraj.dantu" <neeraj.dantu@octavosystems.com>
-Date: Mon, 11 Oct 2021 00:05:23 -0500
-Subject: [PATCH] Add OSD32MP1-BRK board support
+From 4ba1fa262c126da0fccc41777483c519f61b3f6c Mon Sep 17 00:00:00 2001
+From: "neeraj.dantu" <dantuguf14105@gmail.com>
+Date: Sun, 21 Nov 2021 23:43:51 -0600
+Subject: [PATCH 1/2] Add OSD32MP1-BRK board support
 
 ---
  arch/arm/boot/dts/Makefile                    |    3 +-
