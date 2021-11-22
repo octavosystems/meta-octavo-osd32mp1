@@ -65,16 +65,17 @@ I. Adding the meta-octavo layer to your build
   - bitbake-layers add-layer <PATH TO THIS REPO>
   
   Change MACHINE in <BUILD_FOLDER>/conf/local.conf
-  - MACHINE = "osd32mp1-brk"
+  - MACHINE = "osd32mp1-brk"  for OSD32MP1-BRK
+  - MACHINE = "osd32mp1-red"  for OSD32MP1-RED
 
 II. Misc
   Generate image
   - bitbake octavo-image-weston
 
 III. Program the board
-  Currently, OSD32MP1-BRK is supported. You will need Cube Programmer(>v2.4): https://www.st.com/en/development-tools/stm32cubeprog.html.
+  You will need Cube Programmer(>v2.4): https://www.st.com/en/development-tools/stm32cubeprog.html.
   For Linux:
-  - cd <BUILD_FOLDER>/tmp-glibc/deploy/images/osd32mp1-brk
+  - cd <BUILD_FOLDER>/tmp-glibc/deploy/images/\$MACHINE
   - Set boot mode to USB
   - Make sure you have an SD card in the SD card slot to program
   - Connect the board to Host computer
@@ -99,14 +100,19 @@ Total number of available STM32 device in DFU mode: 1
 
   Program the board
   - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-brk-trusted.tsv
+  - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-red-trusted.tsv
   
   To Flash on Windows, use cp_image_files.py:
   Usage: 
     -b <Path to build directory>
     -d <Path to destination directory>
-  - When copying files from Linux to Windows, there are no symbolic links so you have to rename the .ext4 files to remove anything between "osd32mp1-brk" and ".ext4"
+  - When copying files from Linux to Windows, there are no symbolic links so you have to rename the .ext4 files to remove anything between "osd32mp1-brk/red" and ".ext4"
   
   
 Known Issues
 =================
 repo init error: https://stackoverflow.com/questions/65193998/syntaxerror-invalid-syntax-to-repo-init-in-the-aosp-code
+
+For OSD32MP1-RED::
+1. Audio over HDMI currently does not work
+2. Booting over eMMC does not mount /userfs /vendorfs and /bootfs. So, it is not recommended to use eMMC with this version of the layer
