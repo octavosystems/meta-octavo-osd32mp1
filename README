@@ -113,6 +113,5 @@ Known Issues
 =================
 repo init error: https://stackoverflow.com/questions/65193998/syntaxerror-invalid-syntax-to-repo-init-in-the-aosp-code
 
-For OSD32MP1-RED::
-1. Audio over HDMI currently does not work
-2. Booting over eMMC does not mount /userfs /vendorfs and /bootfs. So, it is not recommended to use eMMC with this version of the layer
+
+
