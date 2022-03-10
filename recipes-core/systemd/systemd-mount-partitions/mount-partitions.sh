@@ -25,6 +25,9 @@ get_type() {
         ubi*)
             ROOT_TYPE="nand"
             ;;
+        /dev/mmcblk0*)
+            ROOT_TYPE="sdmmc-brk"
+            ;;
         /dev/mmcblk1*)
             ROOT_TYPE="sdmmc"
             ;;
@@ -37,6 +40,9 @@ get_type() {
             ubi*)
                 ROOT_TYPE="nand"
                 ;;
+            mmcblk0*)
+                ROOT_TYPE="sdmmc-brk"
+                ;;
             mmcblk1*)
                 ROOT_TYPE="sdmmc"
                 ;;
@@ -47,7 +53,9 @@ get_type() {
             ;;
         esac
     else
-        if [ `cat /proc/cmdline | sed "s/.*mmcblk1.*/mmcblk1/" ` == "mmcblk1" ]; then
+        if [ `cat /proc/cmdline | sed "s/.*mmcblk0.*/mmcblk0/" ` == "mmcblk0" ]; then
+            ROOT_TYPE="sdmmc-brk"
+        elif [ `cat /proc/cmdline | sed "s/.*mmcblk1.*/mmcblk1/" ` == "mmcblk1" ]; then
             ROOT_TYPE="sdmmc"
         elif [ `cat /proc/cmdline | sed "s/.*mmcblk2.*/mmcblk2/" ` == "mmcblk2" ]; then
             ROOT_TYPE="mmc"
@@ -77,6 +85,21 @@ found_devices() {
                     then
                         _device="/dev/$(basename $f)"
                         _option="-t ubifs"
+                        break;
+                    fi
+                fi
+            done
+            ;;
+        sdmmc-brk)
+            local sdmmc_parts=$(ls -1 -d /sys/block/mmcblk0/mmcblk0p*)
+            for f in $sdmmc_parts;
+            do
+                if [ -r $f/uevent ];
+                then
+                    cat $f/uevent | grep PARTNAME | sed "s/PARTNAME=//" | grep -sq "^${_search}"
+                    if [ "$?" -eq 0 ];
+                    then
+                        _device="/dev/$(basename $f)"
                         break;
                     fi
                 fi
