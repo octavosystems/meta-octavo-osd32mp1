@@ -1,0 +1,24 @@
+From f1346392029d64af36135efc95c6dc46c06edd7d Mon Sep 17 00:00:00 2001
+From: Neeraj Dantu <dantuguf14105@gmail.com>
+Date: Tue, 22 Nov 2022 17:12:46 -0600
+Subject: [PATCH] Fix device tree for 800MHz speedgrade MP1 to work with 650MHz
+
+---
+ arch/arm/dts/stm32mp15xa.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/dts/stm32mp15xa.dtsi b/arch/arm/dts/stm32mp15xa.dtsi
+index 5ed7e594f4..59da3e5dc8 100644
+--- a/arch/arm/dts/stm32mp15xa.dtsi
++++ b/arch/arm/dts/stm32mp15xa.dtsi
+@@ -8,6 +8,6 @@
+ 		opp-650000000 {
+ 			opp-hz = /bits/ 64 <650000000>;
+ 			opp-microvolt = <1200000>;
+-			opp-supported-hw = <0x1>;
++			opp-supported-hw = <0x1 0x2>;
+ 		};
+ };
+-- 
+2.25.1
+
