@@ -1,30 +1,15 @@
-From a24023b7ec6480efb0e26f0d413983a743d6c6e1 Mon Sep 17 00:00:00 2001
-From: "neeraj.dantu" <dantuguf14105@gmail.com>
-Date: Sun, 21 Nov 2021 23:39:04 -0600
-Subject: [PATCH 3/3] Add OSD32MP1-RED Device tree support
+From 31e01b36082af7de759db857b9b2932570c6cb00 Mon Sep 17 00:00:00 2001
+From: Neeraj Dantu <dantuguf14105@gmail.com>
+Date: Thu, 17 Nov 2022 10:54:24 -0600
+Subject: [PATCH] Add Device Tree support for OSD32MP1-RED
 
 ---
- arch/arm/dts/Makefile                         |    3 +-
  .../dts/stm32mp157c-osd32mp1-red-u-boot.dtsi  |  233 +++
- arch/arm/dts/stm32mp157c-osd32mp1-red.dts     | 1445 +++++++++++++++++
- 3 files changed, 1680 insertions(+), 1 deletion(-)
+ arch/arm/dts/stm32mp157c-osd32mp1-red.dts     | 1477 +++++++++++++++++
+ 2 files changed, 1710 insertions(+)
  create mode 100644 arch/arm/dts/stm32mp157c-osd32mp1-red-u-boot.dtsi
  create mode 100644 arch/arm/dts/stm32mp157c-osd32mp1-red.dts
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 6e67c6d18a..ec4efe993b 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -960,7 +960,8 @@ dtb-$(CONFIG_STM32MP15x) += \
- 	stm32mp157f-ev1.dtb \
- 	stm32mp15xx-dhcom-pdk2.dtb \
- 	stm32mp15xx-dhcor-avenger96.dtb \
--	stm32mp157c-osd32mp1-brk.dtb
-+	stm32mp157c-osd32mp1-brk.dtb \
-+	stm32mp157c-osd32mp1-red.dtb
- 
- dtb-$(CONFIG_SOC_K3_AM6) += k3-am654-base-board.dtb k3-am654-r5-base-board.dtb
- dtb-$(CONFIG_SOC_K3_J721E) += k3-j721e-common-proc-board.dtb \
 diff --git a/arch/arm/dts/stm32mp157c-osd32mp1-red-u-boot.dtsi b/arch/arm/dts/stm32mp157c-osd32mp1-red-u-boot.dtsi
 new file mode 100644
 index 0000000000..6da91e0bb8
@@ -266,16 +251,20 @@ index 0000000000..6da91e0bb8
 +
 diff --git a/arch/arm/dts/stm32mp157c-osd32mp1-red.dts b/arch/arm/dts/stm32mp157c-osd32mp1-red.dts
 new file mode 100644
-index 0000000000..6104aff03d
+index 0000000000..038f3e07b5
 --- /dev/null
 +++ b/arch/arm/dts/stm32mp157c-osd32mp1-red.dts
-@@ -0,0 +1,1445 @@
+@@ -0,0 +1,1477 @@
 +/* SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause) */
 +/*
-+ * Copyright (C) Octavo Systems 2021 - All Rights Reserved
++ * Copyright (C) Octavo Systems 2022 - All Rights Reserved
 + * Author: Neeraj Dantu <dantuguf14105@gmail.com> for Octavo Systems
 + */
 +
++/* For more information on Device Tree configuration, please refer to
++ * https://wiki.st.com/stm32mpu/wiki/Category:Device_tree_configuration
++ */
++ 
 +/dts-v1/;
 +
 +#include <dt-bindings/pinctrl/stm32-pinfunc.h>
@@ -338,6 +327,12 @@ index 0000000000..6104aff03d
 +			no-map;
 +		};
 +
++		mcu_rsc_table: mcu_rsc_table@10048000 {
++			compatible = "shared-dma-pool";
++			reg = <0x10048000 0x8000>;
++			no-map;
++		};
++
 +		mcuram:mcuram@30000000{
 +			compatible = "shared-dma-pool";
 +			reg = <0x30000000 0x40000>;
@@ -366,7 +361,16 @@ index 0000000000..6104aff03d
 +	};
 +
 +	chosen {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
 +		stdout-path = "serial0:115200n8";
++
++		framebuffer {
++			compatible = "simple-framebuffer";
++			clocks = <&rcc LTDC_PX>;
++			status = "disabled";
++		};
 +	};
 +
 +	led {
@@ -379,17 +383,6 @@ index 0000000000..6104aff03d
 +		};
 +	};
 +
-+	usb_phy_tuning:usb-phy-tuning{
-+		st,hs-dc-level = <2>;
-+		st,fs-rftime-tuning;
-+		st,hs-rftime-reduction;
-+		st,hs-current-trim = <15>;
-+		st,hs-impedance-trim = <1>;
-+		st,squelch-level = <3>;
-+		st,hs-rx-offset = <2>;
-+		st,no-lsfs-sc;
-+	};
-+
 +	vin:vin{
 +		compatible = "regulator-fixed";
 +		regulator-name = "vin";
@@ -398,7 +391,7 @@ index 0000000000..6104aff03d
 +		regulator-always-on;
 +	};
 +
-+	sound {
++	sound: sound {
 +		compatible = "audio-graph-card";
 +		label = "STM32MP15-DK";
 +		routing =
@@ -1014,9 +1007,9 @@ index 0000000000..6104aff03d
 +
 +&m4_rproc{
 +	memory-region = <&retram>, <&mcuram>, <&mcuram2>, <&vdev0vring0>,
-+			<&vdev0vring1>, <&vdev0buffer>;
-+	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>;
-+	mbox-names = "vq0", "vq1", "shutdown";
++			<&vdev0vring1>, <&vdev0buffer>, <&mcu_rsc_table>;
++	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>, <&ipcc 3>;
++	mbox-names = "vq0", "vq1", "shutdown", "detach";
 +	interrupt-parent = <&exti>;
 +	interrupts = <68 1>;
 +	wakeup-source;
@@ -1148,6 +1141,7 @@ index 0000000000..6104aff03d
 +		touchscreen-size-x = <480>;
 +		touchscreen-size-y = <800>;
 +		panel = <&panel_otm8009a>;
++		iovcc-supply = <&v3v3>;
 +		vcc-supply = <&v3v3>;
 +		status = "okay";
 +	};
@@ -1237,7 +1231,7 @@ index 0000000000..6104aff03d
 +		compatible = "st,stusb1600";
 +		reg = <0x28>;
 +		interrupt-parent = <&gpioe>;
-+		interrupts = <8 IRQ_TYPE_EDGE_FALLING>;
++		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
 +		pinctrl-0 = <&stusb1600_pins_mx>;
 +		pinctrl-names = "default";
 +		status = "okay";
@@ -1372,7 +1366,6 @@ index 0000000000..6104aff03d
 +			vref_ddr:vref_ddr{
 +				regulator-name = "vref_ddr";
 +				regulator-always-on;
-+				regulator-over-current-protection;
 +			};
 +
 +			bst_out:boost{
@@ -1701,12 +1694,36 @@ index 0000000000..6104aff03d
 +
 +&usbphyc_port0 {
 +	phy-supply = <&vdd_usb>;
-+	st,phy-tuning = <&usb_phy_tuning>;
++	st,tune-hs-dc-level = <2>;
++	st,enable-fs-rftime-tuning;
++	st,enable-hs-rftime-reduction;
++	st,trim-hs-current = <15>;
++	st,trim-hs-impedance = <1>;
++	st,tune-squelch-level = <3>;
++	st,tune-hs-rx-offset = <2>;
++	st,no-lsfs-sc;
++
++	/*
++	 * Hack to keep hub active until all connected devices are suspended
++	 * otherwise the hub will be powered off as soon as the v3v3 is disabled
++	 * and it can disturb connected devices.
++	 */
++	connector {
++		compatible = "usb-a-connector";
++		vbus-supply = <&v3v3>;
++	};
 +};
 +
 +&usbphyc_port1 {
 +	phy-supply = <&vdd_usb>;
-+	st,phy-tuning = <&usb_phy_tuning>;
++	st,tune-hs-dc-level = <2>;
++	st,enable-fs-rftime-tuning;
++	st,enable-hs-rftime-reduction;
++	st,trim-hs-current = <15>;
++	st,trim-hs-impedance = <1>;
++	st,tune-squelch-level = <3>;
++	st,tune-hs-rx-offset = <2>;
++	st,no-lsfs-sc;
 +};
 +
 +&m_can1 {
@@ -1716,5 +1733,5 @@ index 0000000000..6104aff03d
 +	status = "okay";
 +};
 -- 
-2.17.1
+2.25.1
 

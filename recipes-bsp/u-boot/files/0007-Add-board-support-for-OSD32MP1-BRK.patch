@@ -1,0 +1,62 @@
+From 792b618f357bae390a5e850942e5080e011b2f63 Mon Sep 17 00:00:00 2001
+From: Neeraj Dantu <dantuguf14105@gmail.com>
+Date: Thu, 17 Nov 2022 10:54:24 -0600
+Subject: [PATCH] Add board support for OSD32MP1-BRK
+
+---
+ arch/arm/mach-stm32mp/Kconfig.15x | 12 ++++++++++++
+ board/octavo/osd32mp1-brk/Kconfig | 13 +++++++++++++
+ 2 files changed, 25 insertions(+)
+ create mode 100644 board/octavo/osd32mp1-brk/Kconfig
+
+diff --git a/arch/arm/mach-stm32mp/Kconfig.15x b/arch/arm/mach-stm32mp/Kconfig.15x
+index 1887ce15ff..9b6b997e2e 100644
+--- a/arch/arm/mach-stm32mp/Kconfig.15x
++++ b/arch/arm/mach-stm32mp/Kconfig.15x
+@@ -54,6 +54,17 @@ config TARGET_MICROGEA_STM32MP1
+ 	    pluged 7" OF for creating complete MicroGEA STM32MP1 MicroDev 2.0 7"
+ 	    Open Frame Solution board.
+ 
++config TARGET_OCTAVO_OSD32MP1_BRK
++	bool "Octavo OSD32MP1 BRK"
++	imply BOOTSTAGE
++	imply CMD_BOOTSTAGE
++	imply CMD_CLS if CMD_BMP
++	imply DISABLE_CONSOLE
++	imply PRE_CONSOLE_BUFFER
++	imply SILENT_CONSOLE
++	help
++		Target the Octavo BRK board based on OSD32MP1 SiP.
++
+ config TARGET_ICORE_STM32MP1
+ 	bool "Engicam i.Core STM32MP1 SOM"
+ 	imply BOOTSTAGE
+@@ -130,5 +141,6 @@ endif
+ source "board/st/stm32mp1/Kconfig"
+ source "board/dhelectronics/dh_stm32mp1/Kconfig"
+ source "board/engicam/stm32mp1/Kconfig"
++source "board/octavo/osd32mp1-brk/Kconfig"
+ 
+ endif
+diff --git a/board/octavo/osd32mp1-brk/Kconfig b/board/octavo/osd32mp1-brk/Kconfig
+new file mode 100644
+index 0000000000..d5e23eabc3
+--- /dev/null
++++ b/board/octavo/osd32mp1-brk/Kconfig
+@@ -0,0 +1,13 @@
++if TARGET_OCTAVO_OSD32MP1_BRK
++
++config SYS_BOARD
++	default "osd32mp1-brk"
++
++config SYS_VENDOR
++	default "octavo"
++
++config SYS_CONFIG_NAME
++	default "stm32mp15_st_common"
++
++source "board/st/common/Kconfig"
++endif
+-- 
+2.25.1
+

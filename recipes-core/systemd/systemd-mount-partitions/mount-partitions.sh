@@ -80,7 +80,7 @@ found_devices() {
             do
                 if [ -r $f/name ];
                 then
-                    cat $f/name | grep -sq "^${_search}"
+                    cat $f/name | grep -sq -E "^${_search}$"
                     if [ "$?" -eq 0 ];
                     then
                         _device="/dev/$(basename $f)"
