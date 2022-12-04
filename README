@@ -17,7 +17,7 @@ Dependencies
   URI: https://github.com/openembedded/openembedded-core.git
   branch: kirkstone
 
-  URI: git://github.com/openembedded/meta-openembedded.git
+  URI: https://github.com/openembedded/meta-openembedded.git
   branch: kirkstone
   
   URI: https://github.com/meta-qt5/meta-qt5
