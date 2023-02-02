@@ -13,6 +13,8 @@ USERFS_PARTITION_SIZE = "128000"
 # Install nano editor
 IMAGE_INSTALL += "nano"
 
+IMAGE_INSTALL += "iperf3"
+
 # Add native compile tools
 IMAGE_INSTALL += "packagegroup-core-buildessential"
 
