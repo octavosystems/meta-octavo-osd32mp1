@@ -67,6 +67,7 @@ I. Adding the meta-octavo layer to your build
   Change MACHINE in <BUILD_FOLDER>/conf/local.conf
   - MACHINE = "osd32mp1-brk"  for OSD32MP1-BRK
   - MACHINE = "osd32mp1-red"  for OSD32MP1-RED
+  - MACHINE = "osd32mp1-red-v1_2" for OSD32MP1-RED V1.2
 
 II. Misc
   Generate image
@@ -101,6 +102,7 @@ Total number of available STM32 device in DFU mode: 1
   Program the board
   - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-brk-trusted.tsv
   - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-red-trusted.tsv
+  - STM32_Programmer_CLI -c port=USB1 -w flashlayout_octavo-image-weston/trusted/FlashLayout_sdcard_stm32mp157c-osd32mp1-red-v1_2-trusted.tsv
   
   To Flash on Windows, use cp_image_files.py:
   Usage: 
