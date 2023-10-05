@@ -42,6 +42,7 @@ Pre-requisities:
 Usage:
   -b <Path to build directory>
   -d <Path to destination directory>
+  -p <Platform> defaults to brk.
 
 """
 import sys
@@ -53,12 +54,12 @@ import shutil
 # Constants
 # ------------------------------------------------------------------------
 image_dir = "tmp-glibc/deploy/images/osd32mp1-brk"
-
+image_dir_brk = "tmp-glibc/deploy/images/osd32mp1-brk"
+image_dir_red_v1_2 = "tmp-glibc/deploy/images/osd32mp1-red-v1_2"
 
 # ------------------------------------------------------------------------
 # Global variables
 # ------------------------------------------------------------------------
-
 # Files to copy
 #   (<sub-directory relative to image_dir>, <file name>)
 files = [
@@ -66,13 +67,44 @@ files = [
     ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-brk-usb.stm32"),
     ("fip",                                     "fip",                  "fip-stm32mp157c-osd32mp1-brk-trusted.bin"),
     ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-brk-sdcard.stm32"),
-    ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-brk-sdcard.stm32"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "metadata.bin"),
     ("fip",                                     "fip",                  "fip-stm32mp157c-osd32mp1-brk-trusted.bin"),
     (None,                                      None,                   "st-image-bootfs-openstlinux-weston-osd32mp1-brk.ext4"),
     (None,                                      None,                   "st-image-vendorfs-openstlinux-weston-osd32mp1-brk.ext4"),
     (None,                                      None,                   "octavo-image-weston-openstlinux-weston-osd32mp1-brk.ext4"),
     (None,                                      None,                   "st-image-userfs-openstlinux-weston-osd32mp1-brk.ext4")
 ]
+
+
+# Files to copy
+#   (<sub-directory relative to image_dir>, <file name>)
+files_brk = [
+    ("flashlayout_octavo-image-weston/trusted", None,                   "FlashLayout_sdcard_stm32mp157c-osd32mp1-brk-trusted.tsv"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-brk-usb.stm32"),
+    ("fip",                                     "fip",                  "fip-stm32mp157c-osd32mp1-brk-trusted.bin"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-brk-sdcard.stm32"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "metadata.bin"),
+    ("fip",                                     "fip",                  "fip-stm32mp157c-osd32mp1-brk-trusted.bin"),
+    (None,                                      None,                   "st-image-bootfs-openstlinux-weston-osd32mp1-brk.ext4"),
+    (None,                                      None,                   "st-image-vendorfs-openstlinux-weston-osd32mp1-brk.ext4"),
+    (None,                                      None,                   "octavo-image-weston-openstlinux-weston-osd32mp1-brk.ext4"),
+    (None,                                      None,                   "st-image-userfs-openstlinux-weston-osd32mp1-brk.ext4")
+]
+# Files to copy
+#   (<sub-directory relative to image_dir>, <file name>)
+files_red_v1_2 = [
+    ("flashlayout_octavo-image-weston/trusted", None,                   "FlashLayout_sdcard_stm32mp157c-osd32mp1-red-v1_2-trusted.tsv"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-red-v1_2-usb.stm32"),
+    ("fip",                                     "fip",                  "fip-stm32mp157c-osd32mp1-red-v1_2-trusted.bin"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "tf-a-stm32mp157c-osd32mp1-red-v1_2-sdcard.stm32"),
+    ("arm-trusted-firmware",                    "arm-trusted-firmware", "metadata.bin"),
+    ("fip",                                     "fip",                  "fip-stm32mp157c-osd32mp1-red-v1_2-trusted.bin"),
+    (None,                                      None,                   "st-image-bootfs-openstlinux-weston-osd32mp1-red-v1_2.ext4"),
+    (None,                                      None,                   "st-image-vendorfs-openstlinux-weston-osd32mp1-red-v1_2.ext4"),
+    (None,                                      None,                   "octavo-image-weston-openstlinux-weston-osd32mp1-red-v1_2.ext4"),
+    (None,                                      None,                   "st-image-userfs-openstlinux-weston-osd32mp1-red-v1_2.ext4")
+]
+
 
 
 
@@ -97,7 +129,7 @@ def usage():
 
 if __name__ == '__main__':
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hb:d:", ["help", "build=", "dest="])
+        opts, args = getopt.getopt(sys.argv[1:], "hb:d:p:", ["help", "build=", "dest=", "plat="])
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)
@@ -106,6 +138,7 @@ if __name__ == '__main__':
 
     build_dir = None
     dest_dir  = None
+    platform  = None
     for o, a in opts:
         if   o in ("-h", "--help"):
             usage()
@@ -114,12 +147,24 @@ if __name__ == '__main__':
             build_dir = a
         elif o in ("-d", "--dest"):
             dest_dir  = a
+        elif o in ("-p", "--plat"):
+            platform  = a
         else:
             assert False, "unhandled option"
 
     if (build_dir == None) or (dest_dir == None):
         usage()
         sys.exit()
+
+    if (platform == None):
+        platform = "brk"
+
+    if (platform == "brk"):
+        image_dir = image_dir_brk
+        files = files_brk
+    elif (platform == "red-v1_2"):
+        image_dir = image_dir_red_v1_2
+        files = files_red_v1_2
 
     if not os.path.isdir(build_dir):
         print("Build directory does not exist: {0}".format(build_dir))

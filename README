@@ -64,6 +64,7 @@ I. Adding the meta-octavo layer to your build
   Change MACHINE in <BUILD_FOLDER>/conf/local.conf
   - MACHINE = "osd32mp1-brk"  for OSD32MP1-BRK
   - MACHINE = "osd32mp1-red"  for OSD32MP1-RED
+  - MACHINE = "osd32mp1-red-v1_2" for OSD32MP1-RED V1.2
 
 II. Misc
   Generate image
