@@ -40,7 +40,7 @@ sudo apt-get install -y git curl gpg python-is-python3
 sudo apt-get install -y build-essential chrpath diffstat gawk gcc-multilib libegl1-mesa libgmp-dev libmpc-dev libsdl1.2-dev libssl-dev pylint python3-git python3-jinja2 python3-pip socat texinfo xterm zstd
 sudo snap install git-repo
 
-- Please make sure you have at least 50GB of free disk space
+- Please make sure you have at least 100GB of free disk space
 - The layer was tested on Ubuntu 20.04 LTS
 - Building an image may take a while based on machine capabilities
 
