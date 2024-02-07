@@ -26,7 +26,8 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------
 This file contains the physical interfaces to the OSD32MP1-BRK User LEDs
-It provides basic functions like on, off, and blink
+It provides basic functions like on, off, and blink. It is part of the 
+Webserver demo for the BRK
 --------------------------------------------------------------------------
 """
 import os
