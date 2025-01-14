@@ -17,6 +17,6 @@ do_install () {
 	install -m 0755 LEDWebServer.py ${D}${prefix}/local/demo/LEDWebDemo/LEDWebServer.py
 }
 
-FILES_${PN}-userfs += "${prefix}/local/demo/LEDWebDemo/brkLed.py \
+FILES:${PN}-userfs += "${prefix}/local/demo/LEDWebDemo/brkLed.py \
 		       ${prefix}/local/demo/LEDWebDemo/ledTemplate.html \
 		       ${prefix}/local/demo/LEDWebDemo/LEDWebServer.py"

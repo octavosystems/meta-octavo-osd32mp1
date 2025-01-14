@@ -2,7 +2,7 @@
 require recipes-st/images/st-image-weston.bb
 
 # Remove resize helper
-CORE_IMAGE_EXTRA_INSTALL_remove += "resize-helper"
+IMAGE_INSTALL:remove = "resize-helper"
 
 # Set ROOTFS partition size
 IMAGE_ROOTFS_MAXSIZE = "1024000"

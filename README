@@ -6,28 +6,28 @@ Dependencies
 ============
 
   URI: https://github.com/STMicroelectronics/meta-st-stm32mp
-  branch: dunfell
+  branch: mickledore
 
   URI: https://github.com/STMicroelectronics/meta-st-openstlinux
-  branch: dunfell
+  branch: mickledore
 
   URI: https://github.com/STMicroelectronics/meta-st-scripts
-  branch: dunfell
+  branch: mickledore
   
   URI: https://github.com/STMicroelectronics/meta-st-scripts
-  branch: dunfell
+  branch: mickledore
   
   URI: https://github.com/openembedded/openembedded-core.git
-  branch: dunfell
+  branch: mickledore
 
   URI: git://github.com/openembedded/meta-openembedded.git
-  branch: dunfell
+  branch: mickledore
   
   URI: https://github.com/meta-qt5/meta-qt5
-  branch: dunfell
+  branch: mickledore
 
   URI: https://github.com/openembedded/bitbake.git
-  branch: dunfell
+  branch: mickledore
   
 Patches
 =======
@@ -44,7 +44,7 @@ sudo apt-get install -y build-essential chrpath diffstat gawk gcc-multilib libeg
 sudo snap install git-repo
 
 - Please make sure you have at least 50GB of free disk space
-- The layer was tested on Ubuntu 18.04 and Ubuntu 20.04
+- The layer was tested on Ubuntu 22.04
 - Building an image may take a while based on machine capabilities
 
 Getting Started
@@ -52,7 +52,8 @@ Getting Started
 
 I. Adding the meta-octavo layer to your build
   Get Distribution Package: 
-  - repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-5.10-dunfell-mp1-21-03-31
+  - repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-6.1-yocto-mickledore-mpu-v24.06.26
+
   - repo sync
   
   Initialize environment
@@ -66,9 +67,10 @@ I. Adding the meta-octavo layer to your build
   
   Change MACHINE in <BUILD_FOLDER>/conf/local.conf
   - MACHINE = "osd32mp1-brk"  for OSD32MP1-BRK
-  - MACHINE = "osd32mp1-red"  for OSD32MP1-RED
-  - MACHINE = "osd32mp1-red-v1_2" for OSD32MP1-RED V1.2
-  - MACHINE = "osd32mp1-1g-red-v1_2" for OSD32MP1-1G-RED V1.2
+  # Not yet supported
+  #- MACHINE = "osd32mp1-red"  for OSD32MP1-RED
+  #- MACHINE = "osd32mp1-red-v1_2" for OSD32MP1-RED V1.2
+  #- MACHINE = "osd32mp1-1g-red-v1_2" for OSD32MP1-1G-RED V1.2
 
 II. Misc
   Generate image
