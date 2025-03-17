@@ -1,4 +1,4 @@
-From 89391722b216cc19ae8e9b5e1a56a6d561decdfd Mon Sep 17 00:00:00 2001
+From bfa05922a6259f43ec01b4b05f9b30c4032f4cc3 Mon Sep 17 00:00:00 2001
 From: neeraj dantu <dantuguf14105@gmail.com>
 Date: Thu, 31 Oct 2024 10:20:21 -0500
 Subject: [PATCH] Add OSD32MP1-BRK board support
@@ -6,8 +6,8 @@ Subject: [PATCH] Add OSD32MP1-BRK board support
 ---
  fdts/osd32mp1_ddr_1x4Gb.dtsi                | 107 +++++
  fdts/stm32mp157f-osd32mp1-brk-fw-config.dts |   8 +
- fdts/stm32mp157f-osd32mp1-brk.dts           | 420 ++++++++++++++++++++
- 3 files changed, 535 insertions(+)
+ fdts/stm32mp157f-osd32mp1-brk.dts           | 426 ++++++++++++++++++++
+ 3 files changed, 541 insertions(+)
  create mode 100644 fdts/osd32mp1_ddr_1x4Gb.dtsi
  create mode 100644 fdts/stm32mp157f-osd32mp1-brk-fw-config.dts
  create mode 100644 fdts/stm32mp157f-osd32mp1-brk.dts
@@ -127,7 +127,7 @@ index 000000000..f726ddf3f
 +#define DDR_DX3GCR 0x0000CE80
 diff --git a/fdts/stm32mp157f-osd32mp1-brk-fw-config.dts b/fdts/stm32mp157f-osd32mp1-brk-fw-config.dts
 new file mode 100644
-index 000000000..02e2d8ebf
+index 000000000..ed51df76d
 --- /dev/null
 +++ b/fdts/stm32mp157f-osd32mp1-brk-fw-config.dts
 @@ -0,0 +1,8 @@
@@ -141,10 +141,10 @@ index 000000000..02e2d8ebf
 +#include "stm32mp15-fw-config.dtsi"
 diff --git a/fdts/stm32mp157f-osd32mp1-brk.dts b/fdts/stm32mp157f-osd32mp1-brk.dts
 new file mode 100644
-index 000000000..68752df64
+index 000000000..3263e9bc2
 --- /dev/null
 +++ b/fdts/stm32mp157f-osd32mp1-brk.dts
-@@ -0,0 +1,420 @@
+@@ -0,0 +1,426 @@
 +// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-3-Clause)
 +/*
 + * Copyright (C) 2024, Octavo Systems - All Rights Reserved
@@ -165,7 +165,7 @@ index 000000000..68752df64
 +#include "stm32mp15-pinctrl.dtsi"
 +
 +/ {
-+	model = "Octavo Systems OSD32MP1-BRK - openstlinux-6.1-yocto-mickledore-mpu-v24.06.26";
++	model = "Octavo Systems OSD32MP1-BRK";
 +	compatible = "oct,stm32mp157f-osd32mp1-brk", "st,stm32mp157";
 +
 +	memory@c0000000 {
@@ -205,6 +205,12 @@ index 000000000..68752df64
 +	};
 +
 +}; /*root*/
++
++&ddr {
++	vdd-supply = <&vdd_ddr>;
++	vtt-supply = <&vtt_ddr>;
++	vref-supply = <&vref_ddr>;
++};
 +
 +&pinctrl {
 +	sdmmc1_pins_mx: sdmmc1_mx-0 {
@@ -565,4 +571,6 @@ index 000000000..68752df64
 +&usbphyc_port1 {
 +	phy-supply = <&vdd_usb>;
 +};
-\ No newline at end of file
+-- 
+2.34.1
+

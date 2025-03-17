@@ -1,40 +1,42 @@
-From 9605882c3a70f76c43b1a79a688a36f0d22915e6 Mon Sep 17 00:00:00 2001
+From afea56d72bf1c9a560691abdd32ce08e1dce5ba7 Mon Sep 17 00:00:00 2001
 From: neeraj dantu <dantuguf14105@gmail.com>
-Date: Thu, 31 Oct 2024 11:24:01 -0500
-Subject: [PATCH] Add OSD32MP1-BRK board support
+Date: Thu, 31 Oct 2024 10:31:48 -0500
+Subject: [PATCH 1/2] Add OSD32MP1-BRK DT support
 
 ---
- arch/arm/boot/dts/Makefile                    |    3 +-
+ arch/arm/dts/Makefile                         |    3 +-
  .../dts/stm32mp157f-osd32mp1-brk-scmi.dtsi    |   98 ++
- .../arm/boot/dts/stm32mp157f-osd32mp1-brk.dts | 1091 +++++++++++++++++
- 3 files changed, 1191 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/boot/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi
- create mode 100644 arch/arm/boot/dts/stm32mp157f-osd32mp1-brk.dts
+ .../dts/stm32mp157f-osd32mp1-brk-u-boot.dtsi  |   35 +
+ arch/arm/dts/stm32mp157f-osd32mp1-brk.dts     | 1108 +++++++++++++++++
+ 4 files changed, 1243 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157f-osd32mp1-brk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157f-osd32mp1-brk.dts
 
-diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 0fe3d02a5..a6366b659 100644
---- a/arch/arm/boot/dts/Makefile
-+++ b/arch/arm/boot/dts/Makefile
-@@ -1262,7 +1262,8 @@ dtb-$(CONFIG_ARCH_STM32) += \
- 	stm32mp157f-ed1.dtb \
- 	stm32mp157f-ev1.dtb \
- 	stm32mp157f-ev1-a7-examples.dtb \
--	stm32mp157f-ev1-m4-examples.dtb
-+	stm32mp157f-ev1-m4-examples.dtb \
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 80738067c6..73c351a13d 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1314,7 +1314,8 @@ dtb-$(CONFIG_STM32MP15X) += \
+ 	stm32mp15xx-dhcom-picoitx.dtb \
+ 	stm32mp15xx-dhcor-avenger96.dtb \
+ 	stm32mp15xx-dhcor-drc-compact.dtb \
+-	stm32mp15xx-dhcor-testbench.dtb
++	stm32mp15xx-dhcor-testbench.dtb \
 +	stm32mp157f-osd32mp1-brk.dtb
- dtb-$(CONFIG_MACH_SUN4I) += \
- 	sun4i-a10-a1000.dtb \
- 	sun4i-a10-ba10-tvbox.dtb \
-diff --git a/arch/arm/boot/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi b/arch/arm/boot/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi
+ 
+ dtb-$(CONFIG_STM32MP21X) += \
+ 	stm32mp215f-dk.dtb
+diff --git a/arch/arm/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi b/arch/arm/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi
 new file mode 100644
-index 000000000..23b1a1688
+index 0000000000..20180abe04
 --- /dev/null
-+++ b/arch/arm/boot/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi
++++ b/arch/arm/dts/stm32mp157f-osd32mp1-brk-scmi.dtsi
 @@ -0,0 +1,98 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 +/*
-+ * Copyright (C) STMicroelectronics 2022 - All Rights Reserved
-+ * Author: Alexandre Torgue <alexandre.torgue@foss.st.com> for STMicroelectronics.
++ * Copyright (C) Octavo Systems 2024 - All Rights Reserved
++ * Author: Neeraj Dantu
 + */
 +
 +#include "stm32mp15-scmi.dtsi"
@@ -129,12 +131,53 @@ index 000000000..23b1a1688
 +	clocks = <&scmi_clk CK_SCMI_SPI6>;
 +	resets = <&scmi_reset RST_SCMI_SPI6>;
 +};
-diff --git a/arch/arm/boot/dts/stm32mp157f-osd32mp1-brk.dts b/arch/arm/boot/dts/stm32mp157f-osd32mp1-brk.dts
+diff --git a/arch/arm/dts/stm32mp157f-osd32mp1-brk-u-boot.dtsi b/arch/arm/dts/stm32mp157f-osd32mp1-brk-u-boot.dtsi
 new file mode 100644
-index 000000000..ea6060ccb
+index 0000000000..7e7313ec38
 --- /dev/null
-+++ b/arch/arm/boot/dts/stm32mp157f-osd32mp1-brk.dts
-@@ -0,0 +1,1091 @@
++++ b/arch/arm/dts/stm32mp157f-osd32mp1-brk-u-boot.dtsi
+@@ -0,0 +1,35 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-3-Clause)
++/*
++ * Copyright (C) 2024, Octavo Systems - All Rights Reserved
++ * Author: Neeraj Dantu
++ */
++#include "stm32mp15-scmi-u-boot.dtsi"
++
++/ {
++	aliases {
++		i2c3 = &i2c4;
++		usb0 = &usbotg_hs;
++	};
++
++	config {
++		u-boot,boot-led = "LED2_GRN";
++		u-boot,error-led = "LED2_RED";
++		st,stm32prog-gpios = <&gpiod 9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++	};
++}; /*root*/
++
++&uart4 {
++	bootph-all;
++};
++
++&uart4_pins_mx {
++	bootph-all;
++	pins1 {
++		bootph-all;
++	};
++	pins2 {
++		bootph-all;
++		/* pull-up on rx to avoid floating level */
++		bias-pull-up;
++	};
++};
+diff --git a/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts b/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts
+new file mode 100644
+index 0000000000..4e38393ac9
+--- /dev/null
++++ b/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts
+@@ -0,0 +1,1108 @@
 +// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-3-Clause)
 +/*
 + * Copyright (C) 2024, Octavo Systems - All Rights Reserved
@@ -154,7 +197,7 @@ index 000000000..ea6060ccb
 +#include <dt-bindings/rtc/rtc-stm32.h>
 +
 +/ {
-+	model = "Octavo Systems OSD32MP1-BRK - openstlinux-6.1-yocto-mickledore-mpu-v24.06.26";
++	model = "Octavo Systems OSD32MP1-BRK";
 +	compatible = "oct,stm32mp157f-osd32mp1-brk", "st,stm32mp157";
 +
 +	memory@c0000000 {
@@ -213,9 +256,22 @@ index 000000000..ea6060ccb
 +			reg = <0xd4000000 0x4000000>;
 +			no-map;
 +		};
++
++		/* global autoconfigured region for contiguous allocations */
++		linux,cma {
++			compatible = "shared-dma-pool";
++			reusable;
++			size = <0x8000000>;
++			alignment = <0x2000>;
++			linux,cma-default;
++		};
 +	};
 +
 +	aliases {
++		i2c4 = &i2c4;
++		i2c1 = &i2c1;
++		i2c2 = &i2c2;
++		i2c5 = &i2c5;
 +		serial0 = &uart4;
 +		serial2 = &usart2;
 +		serial5 = &uart5;
@@ -696,6 +752,10 @@ index 000000000..ea6060ccb
 +					 <STM32_PINMUX('Z', 2, ANALOG)>; /* SPI6_MOSI */
 +		};
 +	};
++};
++
++&ddrperfm {
++	status = "okay";
 +};
 +
 +&m4_rproc{
@@ -1226,3 +1286,6 @@ index 000000000..ea6060ccb
 +	st,tune-hs-rx-offset = <2>;
 +	st,no-lsfs-sc;
 +};
+-- 
+2.34.1
+

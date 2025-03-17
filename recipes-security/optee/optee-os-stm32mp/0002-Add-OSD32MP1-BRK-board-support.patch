@@ -1,20 +1,20 @@
-From 0613e09579205053c0cefcfa4d0140b455c2d488 Mon Sep 17 00:00:00 2001
+From c0da786963b134419b239283ae6ae8fba59ecc9d Mon Sep 17 00:00:00 2001
 From: neeraj dantu <dantuguf14105@gmail.com>
 Date: Thu, 31 Oct 2024 10:26:38 -0500
 Subject: [PATCH] Add OSD32MP1-BRK board support
 
 ---
- .../arch/arm/dts/stm32mp157f-osd32mp1-brk.dts | 668 ++++++++++++++++++
+ .../arch/arm/dts/stm32mp157f-osd32mp1-brk.dts | 689 ++++++++++++++++++
  core/arch/arm/plat-stm32mp1/conf.mk           |   7 +-
- 2 files changed, 673 insertions(+), 2 deletions(-)
+ 2 files changed, 694 insertions(+), 2 deletions(-)
  create mode 100644 core/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts
 
 diff --git a/core/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts b/core/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts
 new file mode 100644
-index 000000000..e4ccb751c
+index 000000000..b4800eb13
 --- /dev/null
 +++ b/core/arch/arm/dts/stm32mp157f-osd32mp1-brk.dts
-@@ -0,0 +1,668 @@
+@@ -0,0 +1,689 @@
 +// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-3-Clause)
 +/*
 + * Copyright (C) 2024, Octavo Systems - All Rights Reserved
@@ -25,18 +25,17 @@ index 000000000..e4ccb751c
 +
 +#include <dt-bindings/pinctrl/stm32-pinfunc.h>
 +#include <dt-bindings/clock/stm32mp1-clksrc.h>
-+#include <dt-bindings/soc/stm32mp15-etzpc.h>
 +#include "stm32mp157.dtsi"
 +#include "stm32mp15xf.dtsi"
 +#include "stm32mp15xxac-pinctrl.dtsi"
-+#include <dt-bindings/gpio/stm32mp_gpio.h>
++#include <dt-bindings/gpio/gpio.h>
 +#include <dt-bindings/power/stm32mp1-power.h>
 +#include <dt-bindings/mfd/st,stpmic1.h>
 +#include <dt-bindings/soc/stm32mp-provisioning.h>
 +#include <dt-bindings/tamper/st,stm32-tamp.h>
 +
 +/ {
-+	model = "Octavo Systems OSD32MP1-BRK - openstlinux-6.1-yocto-mickledore-mpu-v24.06.26";
++	model = "Octavo Systems OSD32MP1-BRK";
 +	compatible = "oct,stm32mp157f-osd32mp1-brk", "st,stm32mp157";
 +
 +	memory@c0000000 {
@@ -48,19 +47,19 @@ index 000000000..e4ccb751c
 +		#address-cells = <1>;
 +		#size-cells = <1>;
 +		ranges;
-+		mcusram1: mcuram@10000000 {
++		mcusram1: mcuram1@10000000 {
 +			compatible = "shared-dma-pool";
 +			reg = <0x10000000 0x20000>;
 +			no-map;
 +		};
 +
-+		mcusram2: mcuram@10020000 {
++		mcusram2: mcuram2@10020000 {
 +			compatible = "shared-dma-pool";
 +			reg = <0x10020000 0x20000>;
 +			no-map;
 +		};
 +
-+		mcusram3: mcuram@10040000 {
++		mcusram3: mcuram3@10040000 {
 +			compatible = "shared-dma-pool";
 +			reg = <0x10040000 0x10000>;
 +			no-map;
@@ -163,31 +162,31 @@ index 000000000..e4ccb751c
 +
 +	uart4_pins_mx: uart4-0 {
 +		pins1 {
-+			pinmux = <STM32_PINMUX('G', 11, AF6)>; /* UART4_TX */
++			pinmux = <STM32_PINMUX_NSEC('G', 11, AF6)>; /* UART4_TX */
 +			bias-pull-up;
 +			drive-push-pull;
 +			slew-rate = <0>;
 +		};
 +		pins2 {
-+			pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
++			pinmux = <STM32_PINMUX_NSEC('B', 2, AF8)>; /* UART4_RX */
 +			bias-disable;
 +		};
 +	};
 +
 +	uart4_idle_pins_mx: uart4-idle-0 {
 +		pins1 {
-+			pinmux = <STM32_PINMUX('G', 11, ANALOG)>; /* UART4_TX */
++			pinmux = <STM32_PINMUX_NSEC('G', 11, ANALOG)>; /* UART4_TX */
 +		};
 +		pins2 {
-+			pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
++			pinmux = <STM32_PINMUX_NSEC('B', 2, AF8)>; /* UART4_RX */
 +			bias-disable;
 +		};
 +	};
 +
 +	uart4_sleep_pins_mx: uart4-sleep-0 {
 +		pins {
-+			pinmux = <STM32_PINMUX('G', 11, ANALOG)>, /* UART4_TX */
-+				 <STM32_PINMUX('B', 2, ANALOG)>; /* UART4_RX */
++			pinmux = <STM32_PINMUX_NSEC('G', 11, ANALOG)>, /* UART4_TX */
++				 <STM32_PINMUX_NSEC('B', 2, ANALOG)>; /* UART4_RX */
 +		};
 +	};
 +};
@@ -195,8 +194,8 @@ index 000000000..e4ccb751c
 +&pinctrl_z {
 +	i2c4_pins_z_mx: i2c4_mx-0 {
 +		pins {
-+			pinmux = <STM32_PINMUX('Z', 4, AF6)>, /* I2C4_SCL */
-+					 <STM32_PINMUX('Z', 5, AF6)>; /* I2C4_SDA */
++			pinmux = <STM32_PINMUX_NSEC('Z', 4, AF6)>, /* I2C4_SCL */
++					 <STM32_PINMUX_NSEC('Z', 5, AF6)>; /* I2C4_SDA */
 +			bias-pull-up;
 +			drive-open-drain;
 +			slew-rate = <0>;
@@ -254,6 +253,26 @@ index 000000000..e4ccb751c
 +	DECPROT(STM32MP1_ETZPC_STGENC_ID, DECPROT_S_RW, DECPROT_UNLOCK)
 +	DECPROT(STM32MP1_ETZPC_BKPSRAM_ID, DECPROT_S_RW, DECPROT_LOCK)
 +	>;
++};
++
++&mcusram1 {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM1_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM1_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&mcusram2 {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM2_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM2_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&mcusram3 {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM3_ID, DECPROT_NS_RW, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM3_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&retram {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_RETRAM_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_RETRAM_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
 +};
 +
 +&i2c4{
@@ -432,7 +451,7 @@ index 000000000..e4ccb751c
 +				regulator-min-microvolt = <2900000>;
 +				regulator-max-microvolt = <2900000>;
 +				interrupts = <IT_CURLIM_LDO5 0>;
-+				regulator-boot-on;
++				st,regulator-warm-boot-on;
 +				standby-ddr-sr {
 +					regulator-off-in-suspend;
 +				};
@@ -519,6 +538,8 @@ index 000000000..e4ccb751c
 +};
 +
 +&rcc{
++	compatible = "st,stm32mp1-rcc-secure";
++
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&rcc_pins_mx>;
 +	status = "okay";
@@ -683,9 +704,8 @@ index 000000000..e4ccb751c
 +	/delete-property/dma-names;
 +	status = "okay";
 +};
-\ No newline at end of file
 diff --git a/core/arch/arm/plat-stm32mp1/conf.mk b/core/arch/arm/plat-stm32mp1/conf.mk
-index 0b6f4548e..25cc05f7c 100644
+index 2600f51c2..a7b442764 100644
 --- a/core/arch/arm/plat-stm32mp1/conf.mk
 +++ b/core/arch/arm/plat-stm32mp1/conf.mk
 @@ -13,12 +13,14 @@ flavor_dts_file-157D_EV1 = stm32mp157d-ev1.dts
@@ -704,7 +724,7 @@ index 0b6f4548e..25cc05f7c 100644
  
  flavorlist-no_cryp-512M = $(flavor_dts_file-157A_DK1) \
  			  $(flavor_dts_file-157D_DK1)
-@@ -59,7 +61,8 @@ flavorlist-MP15 = $(flavor_dts_file-157A_DHCOR_AVENGER96) \
+@@ -57,7 +59,8 @@ flavorlist-MP15 = $(flavor_dts_file-157A_DHCOR_AVENGER96) \
  		  $(flavor_dts_file-157D_EV1) \
  		  $(flavor_dts_file-157F_DK2) \
  		  $(flavor_dts_file-157F_ED1) \
@@ -714,3 +734,6 @@ index 0b6f4548e..25cc05f7c 100644
  
  flavorlist-MP13 = $(flavor_dts_file-135F_DK)
  
+-- 
+2.34.1
+
