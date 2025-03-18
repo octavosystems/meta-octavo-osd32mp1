@@ -6,28 +6,28 @@ Dependencies
 ============
 
   URI: https://github.com/STMicroelectronics/meta-st-stm32mp
-  branch: mickledore
+  branch: scarthgap
 
   URI: https://github.com/STMicroelectronics/meta-st-openstlinux
-  branch: mickledore
+  branch: scarthgap
 
   URI: https://github.com/STMicroelectronics/meta-st-scripts
-  branch: mickledore
+  branch: scarthgap
   
   URI: https://github.com/STMicroelectronics/meta-st-scripts
-  branch: mickledore
+  branch: scarthgap
   
   URI: https://github.com/openembedded/openembedded-core.git
-  branch: mickledore
+  branch: scarthgap
 
   URI: git://github.com/openembedded/meta-openembedded.git
-  branch: mickledore
+  branch: scarthgap
   
   URI: https://github.com/meta-qt5/meta-qt5
-  branch: mickledore
+  branch: scarthgap
 
   URI: https://github.com/openembedded/bitbake.git
-  branch: mickledore
+  branch: scarthgap
   
 Patches
 =======
@@ -52,8 +52,7 @@ Getting Started
 
 I. Adding the meta-octavo layer to your build
   Get Distribution Package: 
-  - repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-6.1-yocto-mickledore-mpu-v24.06.26
-
+  - repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-6.6-yocto-scarthgap-mpu-v24.11.06
   - repo sync
   
   Initialize environment
@@ -61,7 +60,7 @@ I. Adding the meta-octavo layer to your build
   
   Clone this repo
   - git clone https://github.com/octavosystems/meta-octavo-osd32mp1/
-  - git checkout origin/mickledore_6.1
+  - git checkout origin/scarthgap
   
   Add layer to your build environment
   - bitbake-layers add-layer <PATH TO THIS REPO>
