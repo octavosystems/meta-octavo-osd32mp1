@@ -1,13 +1,13 @@
-From 6212c52bd3f984fe07717d3660431f6366e67946 Mon Sep 17 00:00:00 2001
+From 1555162251115ad1a12c48583f31c63599548590 Mon Sep 17 00:00:00 2001
 From: neeraj dantu <dantuguf14105@gmail.com>
 Date: Fri, 14 Mar 2025 14:49:11 -0500
-Subject: [PATCH] Add DT support for OSD32MP1-BRK
+Subject: [PATCH 2/2] Add DT support for OSD32MP1-BRK
 
 ---
  arch/arm/boot/dts/st/Makefile                 |    3 +-
  .../dts/st/stm32mp157f-osd32mp1-brk-scmi.dtsi |   98 ++
- .../boot/dts/st/stm32mp157f-osd32mp1-brk.dts  | 1108 +++++++++++++++++
- 3 files changed, 1208 insertions(+), 1 deletion(-)
+ .../boot/dts/st/stm32mp157f-osd32mp1-brk.dts  | 1115 +++++++++++++++++
+ 3 files changed, 1215 insertions(+), 1 deletion(-)
  create mode 100644 arch/arm/boot/dts/st/stm32mp157f-osd32mp1-brk-scmi.dtsi
  create mode 100644 arch/arm/boot/dts/st/stm32mp157f-osd32mp1-brk.dts
 
@@ -131,10 +131,10 @@ index 000000000..23b1a1688
 +};
 diff --git a/arch/arm/boot/dts/st/stm32mp157f-osd32mp1-brk.dts b/arch/arm/boot/dts/st/stm32mp157f-osd32mp1-brk.dts
 new file mode 100644
-index 000000000..4e38393ac
+index 000000000..35acd342c
 --- /dev/null
 +++ b/arch/arm/boot/dts/st/stm32mp157f-osd32mp1-brk.dts
-@@ -0,0 +1,1108 @@
+@@ -0,0 +1,1115 @@
 +// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-3-Clause)
 +/*
 + * Copyright (C) 2024, Octavo Systems - All Rights Reserved
@@ -964,6 +964,13 @@ index 000000000..4e38393ac
 +			status = "disabled";
 +		};
 +	};
++	
++	eeprom@50 {
++		compatible = "atmel,24c02";
++		reg = <0x50>;
++		pagesize = <16>;
++		address-width = <16>;
++	};
 +};
 +
 +&i2c5{
@@ -1243,3 +1250,6 @@ index 000000000..4e38393ac
 +	st,tune-hs-rx-offset = <2>;
 +	st,no-lsfs-sc;
 +};
+-- 
+2.34.1
+
