@@ -60,6 +60,7 @@ I. Adding the meta-octavo layer to your build
   
   Clone this repo
   - git clone https://github.com/octavosystems/meta-octavo-osd32mp1/
+  - cd meta-octavo-osd32mp1
   - git checkout origin/scarthgap
   
   Add layer to your build environment
