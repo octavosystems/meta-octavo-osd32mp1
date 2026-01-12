@@ -120,6 +120,12 @@ sudo update-locale LANG=en_US.UTF-8
 # Generate image
 # if you are concerned with how long the build takes, use "time" to find out:
 # e.g. /usr/bin/time -v bitbake octavo-image-weston
+# IMPORTANT INFO: The following command may fail due to updates to some of the recipes SRC_URI.
+# The root cause of this is that several repositories have renamed their default branch to "main" instead of "master"
+# In order to fix the issue, the recipes for which "fetch" fails need to be updated. For example:
+# "SRC_URI = "git://github.com/cracklib/cracklib;protocol=https;branch=master \" in 
+# /openembedded-core/meta/recipes-extended/cracklib/cracklib_2.9.7.bb needs to change to 
+# "SRC_URI = "git://github.com/cracklib/cracklib;protocol=https;branch=main \"
 bitbake octavo-image-weston
 
 III. Program the board
