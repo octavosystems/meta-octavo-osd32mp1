@@ -1,0 +1,907 @@
+From 2685f5dcdd31a664ebcabd2309e4b739fee2b1e2 Mon Sep 17 00:00:00 2001
+From: neeraj dantu <dantuguf14105@gmail.com>
+Date: Sat, 27 Jun 2026 21:04:01 -0500
+Subject: [PATCH] Add DT support for OSD32MP1-RED V1.1
+
+---
+ .../arch/arm/dts/stm32mp157c-osd32mp1-red.dts | 859 ++++++++++++++++++
+ core/arch/arm/plat-stm32mp1/conf.mk           |   7 +-
+ 2 files changed, 864 insertions(+), 2 deletions(-)
+ create mode 100644 core/arch/arm/dts/stm32mp157c-osd32mp1-red.dts
+
+diff --git a/core/arch/arm/dts/stm32mp157c-osd32mp1-red.dts b/core/arch/arm/dts/stm32mp157c-osd32mp1-red.dts
+new file mode 100644
+index 000000000..a88e33934
+--- /dev/null
++++ b/core/arch/arm/dts/stm32mp157c-osd32mp1-red.dts
+@@ -0,0 +1,859 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-3-Clause)
++/*
++ * Copyright (C) 2024, Octavo Systems - All Rights Reserved
++ * Author: Neeraj Dantu
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/pinctrl/stm32-pinfunc.h>
++#include <dt-bindings/clock/stm32mp1-clksrc.h>
++#include "stm32mp157.dtsi"
++#include "stm32mp15xc.dtsi"
++#include "stm32mp15xxac-pinctrl.dtsi"
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/power/stm32mp1-power.h>
++#include <dt-bindings/mfd/st,stpmic1.h>
++#include <dt-bindings/soc/stm32mp-provisioning.h>
++#include <dt-bindings/tamper/st,stm32-tamp.h>
++
++/ {
++	model = "Octavo Systems OSD32MP1-RED";
++	compatible = "oct,stm32mp157c-osd32mp1-red", "st,stm32mp157";
++
++	memory@c0000000 {
++		device_type = "memory";
++		reg = <0xc0000000 0x20000000>;
++	};
++
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		mcusram1: mcuram1@10000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x10000000 0x20000>;
++			no-map;
++		};
++
++		mcusram2: mcuram2@10020000 {
++			compatible = "shared-dma-pool";
++			reg = <0x10020000 0x20000>;
++			no-map;
++		};
++
++		mcusram3: mcuram3@10040000 {
++			compatible = "shared-dma-pool";
++			reg = <0x10040000 0x10000>;
++			no-map;
++		};
++
++		retram: retram@38000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x38000000 0x10000>;
++			no-map;
++		};
++
++		gpu_reserved: gpu@d4000000 {
++			reg = <0xd4000000 0x4000000>;
++			no-map;
++		};
++	};
++
++	led {
++		compatible = "gpio-leds";
++		led-blue {
++			label = "heartbeat";
++			gpios = <&gpiod 11 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++			default-state = "off";
++		};
++	};
++
++	aliases {
++		serial0 = &uart4;
++		ethernet0 = &ethernet0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	vin: vin {
++		compatible = "regulator-fixed";
++		regulator-name = "vin";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		regulator-always-on;
++	};
++
++	shadow-prov {
++		compatible = "st,provisioning";
++		hw2_prov {
++			nvmem-cells = <&hw2_otp>;
++			st,shadow-value = <0x000001E0>;
++			st,shadow-lock = <STICKY_LOCK_SR>;
++		};
++	};
++
++	clocks {
++		clk_hsi: clk-hsi {
++			clock-frequency = <64000000>;
++		};
++		clk_lse: clk-lse {
++			clock-frequency = <32768>;
++			st,bypass;
++			st,digbypass;
++		};
++		clk_hse: clk-hse {
++			clock-frequency = <24000000>;
++			st,digbypass;
++		};
++	};
++}; /*root*/
++
++&pinctrl {
++	uart4_pins_mx: uart4-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX_NSEC('G', 11, AF6)>; /* UART4_TX */
++			bias-pull-up;
++			drive-push-pull;
++			slew-rate = <0>;
++		};
++		pins2 {
++			pinmux = <STM32_PINMUX_NSEC('B', 2, AF8)>; /* UART4_RX */
++			bias-disable;
++		};
++	};
++
++	uart4_idle_pins_mx: uart4-idle-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX_NSEC('G', 11, ANALOG)>; /* UART4_TX */
++		};
++		pins2 {
++			pinmux = <STM32_PINMUX_NSEC('B', 2, AF8)>; /* UART4_RX */
++			bias-disable;
++		};
++	};
++
++	uart4_sleep_pins_mx: uart4-sleep-0 {
++		pins {
++			pinmux = <STM32_PINMUX_NSEC('G', 11, ANALOG)>, /* UART4_TX */
++				 <STM32_PINMUX_NSEC('B', 2, ANALOG)>;  /* UART4_RX */
++		};
++	};
++
++	i2s2_pins_mx: i2s2_mx-0 {
++		pins {
++			pinmux = <STM32_PINMUX('B', 12, AF5)>, /* I2S2_WS */
++					 <STM32_PINMUX('B', 13, AF5)>, /* I2S2_CK */
++					 <STM32_PINMUX('C', 3, AF5)>; /* I2S2_SDO */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <1>;
++		};
++	};
++
++	i2s2_sleep_pins_mx: i2s2_sleep_mx-0 {
++		pins {
++			pinmux = <STM32_PINMUX('B', 12, ANALOG)>, /* I2S2_WS */
++					 <STM32_PINMUX('B', 13, ANALOG)>, /* I2S2_CK */
++					 <STM32_PINMUX('C', 3, ANALOG)>; /* I2S2_SDO */
++		};
++	};
++
++	cec_pins_mx: cec-1 {
++		pins {
++			pinmux = <STM32_PINMUX('B', 6, AF5)>;
++			bias-disable;
++			drive-open-drain;
++			slew-rate = <0>;
++		};
++	};
++
++	cec_sleep_pins_mx: cec-sleep-1 {
++		pins {
++			pinmux = <STM32_PINMUX('B', 6, ANALOG)>; /* HDMI_CEC */
++		};
++	};
++	
++	eth1_pins_mx: eth1_mx-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX('A', 1, AF11)>, /* ETH1_RX_CLK */
++					 <STM32_PINMUX('A', 7, AF11)>, /* ETH1_RX_CTL */
++					 <STM32_PINMUX('B', 0, AF11)>, /* ETH1_RXD2 */
++					 <STM32_PINMUX('B', 1, AF11)>, /* ETH1_RXD3 */
++					 <STM32_PINMUX('C', 4, AF11)>, /* ETH1_RXD0 */
++					 <STM32_PINMUX('C', 5, AF11)>; /* ETH1_RXD1 */
++			bias-disable;
++		};
++		pins2 {
++			pinmux = <STM32_PINMUX('A', 2, AF11)>; /* ETH1_MDIO */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <0>;
++		};
++		pins3 {
++			pinmux = <STM32_PINMUX('B', 11, AF11)>, /* ETH1_TX_CTL */
++					 <STM32_PINMUX('C', 1, AF11)>, /* ETH1_MDC */
++					 <STM32_PINMUX('C', 2, AF11)>, /* ETH1_TXD2 */
++					 <STM32_PINMUX('E', 2, AF11)>, /* ETH1_TXD3 */
++					 <STM32_PINMUX('G', 4, AF11)>, /* ETH1_GTX_CLK */
++					 <STM32_PINMUX('G', 13, AF11)>, /* ETH1_TXD0 */
++					 <STM32_PINMUX('G', 14, AF11)>; /* ETH1_TXD1 */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <2>;
++		};
++	};
++
++	eth1_sleep_pins_mx: eth1_sleep_mx-0 {
++		pins {
++			pinmux = <STM32_PINMUX('A', 1, ANALOG)>, /* ETH1_RX_CLK */
++					 <STM32_PINMUX('A', 2, ANALOG)>, /* ETH1_MDIO */
++					 <STM32_PINMUX('A', 7, ANALOG)>, /* ETH1_RX_CTL */
++					 <STM32_PINMUX('B', 0, ANALOG)>, /* ETH1_RXD2 */
++					 <STM32_PINMUX('B', 1, ANALOG)>, /* ETH1_RXD3 */
++					 <STM32_PINMUX('B', 11, ANALOG)>, /* ETH1_TX_CTL */
++					 <STM32_PINMUX('C', 1, ANALOG)>, /* ETH1_MDC */
++					 <STM32_PINMUX('C', 2, ANALOG)>, /* ETH1_TXD2 */
++					 <STM32_PINMUX('C', 4, ANALOG)>, /* ETH1_RXD0 */
++					 <STM32_PINMUX('C', 5, ANALOG)>, /* ETH1_RXD1 */
++					 <STM32_PINMUX('E', 2, ANALOG)>, /* ETH1_TXD3 */
++					 <STM32_PINMUX('G', 4, ANALOG)>, /* ETH1_GTX_CLK */
++					 <STM32_PINMUX('G', 13, ANALOG)>, /* ETH1_TXD0 */
++					 <STM32_PINMUX('G', 14, ANALOG)>; /* ETH1_TXD1 */
++		};
++	};
++
++	stusb1600_pins_mx: stusb1600-0 {
++		pins {
++			pinmux = <STM32_PINMUX('E', 8, GPIO)>;
++			bias-pull-up;
++		};
++	};
++};
++
++&pinctrl_z {
++	i2c4_pins_z_mx: i2c4_mx-0 {
++		pins {
++			pinmux = <STM32_PINMUX_NSEC('Z', 4, AF6)>, /* I2C4_SCL */
++					 <STM32_PINMUX_NSEC('Z', 5, AF6)>; /* I2C4_SDA */
++			bias-pull-up;
++			drive-open-drain;
++			slew-rate = <0>;
++		};
++	};
++	
++	i2c4_sleep_pins_z_mx: i2c4_sleep_mx-0 {
++		u-boot,dm-pre-reloc;
++		pins {
++			u-boot,dm-pre-reloc;
++			pinmux = <STM32_PINMUX_NSEC('Z', 4, ANALOG)>, /* I2C4_SCL */
++					 <STM32_PINMUX_NSEC('Z', 5, ANALOG)>; /* I2C4_SDA */
++		};
++	};
++};
++
++&bsec {
++	status = "okay";
++	board_id: board_id@ec {
++		reg = <0xec 0x4>;
++		st,non-secure-otp;
++	};
++
++	huk_otp: huk-otp@f0 {
++		reg = <0xf0 0x10>;
++	};
++};
++
++&hash1 {
++	status = "disabled";
++};
++
++&etzpc {
++	status = "okay";
++	st,decprot = <
++	/*"Non Secured" peripherals*/
++	DECPROT(STM32MP1_ETZPC_ADC_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_CRYP1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_DCMI_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_DMA1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_DMA2_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_DMAMUX_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_ETH_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_TT_FDCAN_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_HASH1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_I2C1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_I2C2_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_I2C4_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_I2C5_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_SPI2_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_SDMMC3_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_DLYBSD3_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_SPI5_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_TIM5_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_UART4_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_USART2_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_OTG_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
++	/*"NS_R S_W" peripherals*/
++	DECPROT(STM32MP1_ETZPC_DDRCTRL_ID, DECPROT_NS_R_S_W, DECPROT_LOCK)
++	DECPROT(STM32MP1_ETZPC_DDRPHYC_ID, DECPROT_NS_R_S_W, DECPROT_LOCK)
++	/*"Secured" peripherals*/
++	DECPROT(STM32MP1_ETZPC_RNG1_ID, DECPROT_S_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_STGENC_ID, DECPROT_S_RW, DECPROT_UNLOCK)
++	DECPROT(STM32MP1_ETZPC_BKPSRAM_ID, DECPROT_S_RW, DECPROT_LOCK)
++	>;
++};
++
++&mcusram1 {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM1_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM1_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&mcusram2 {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM2_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM2_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&mcusram3 {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM3_ID, DECPROT_NS_RW, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_SRAM3_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&retram {
++	access-controllers-conf-default = <&etzpc DECPROT(STM32MP1_ETZPC_RETRAM_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)>;
++	access-controllers-conf-load = <&etzpc DECPROT(STM32MP1_ETZPC_RETRAM_ID, DECPROT_S_RW, DECPROT_UNLOCK)>;
++};
++
++&i2c4 {
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&i2c4_pins_z_mx>;
++	pinctrl-1 = <&i2c4_sleep_pins_z_mx>;
++	status = "okay";
++	compatible = "st,stm32mp15-i2c-non-secure";
++	i2c-scl-rising-time-ns = <185>;
++	i2c-scl-falling-time-ns = <20>;
++	clock-frequency = <400000>;
++	/delete-property/dmas;
++	/delete-property/dma-names;
++
++	stusb1600@28 {
++		compatible = "st,stusb1600";
++		reg = <0x28>;
++		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpioe>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&stusb1600_pins_mx>;
++		status = "disabled";
++		vdd-supply = <&vin>;
++
++		connector {
++			compatible = "usb-c-connector";
++			label = "USB-C";
++			power-role = "dual";
++			typec-power-opmode = "default";
++
++			port {
++				con_usbotg_hs_ep: endpoint {
++					remote-endpoint = <&usbotg_hs_ep>;
++				};
++			};
++		};
++	};
++
++	pmic: stpmic@33 {
++		compatible = "st,stpmic1";
++		reg = <0x33>;
++		interrupts-extended = <&gpioa 0 IRQ_TYPE_EDGE_FALLING>;
++		interrupt-controller;
++		#interrupt-cells = <2>;
++		status = "okay";
++
++		regulators {
++			compatible = "st,stpmic1-regulators";
++			buck1-supply = <&vin>;
++			buck2-supply = <&vin>;
++			buck3-supply = <&vin>;
++			buck4-supply = <&vin>;
++			ldo1-supply = <&v3v3>;
++			ldo2-supply = <&vin>;
++			ldo3-supply = <&vdd_ddr>;
++			ldo4-supply = <&vin>;
++			ldo5-supply = <&vin>;
++			ldo6-supply = <&v3v3>;
++			vref_ddr-supply = <&vin>;
++			boost-supply = <&vin>;
++			pwr_sw1-supply = <&bst_out>;
++			pwr_sw2-supply = <&bst_out>;
++
++			vddcore: buck1 {
++				regulator-name = "vddcore";
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-always-on;
++				regulator-initial-mode = <0>;
++				regulator-over-current-protection;
++				lp-stop {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1200000>;
++				};
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_ddr: buck2 {
++				regulator-name = "vdd_ddr";
++				regulator-min-microvolt = <1350000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-always-on;
++				regulator-initial-mode = <0>;
++				regulator-over-current-protection;
++				lp-stop {
++					regulator-suspend-microvolt = <1350000>;
++					regulator-on-in-suspend;
++				};
++				standby-ddr-sr {
++					regulator-suspend-microvolt = <1350000>;
++					regulator-on-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd: buck3 {
++				regulator-name = "vdd";
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++				st,mask-reset;
++				regulator-initial-mode = <0>;
++				regulator-over-current-protection;
++				lp-stop {
++					regulator-suspend-microvolt = <3300000>;
++					regulator-on-in-suspend;
++				};
++				standby-ddr-sr {
++					regulator-suspend-microvolt = <3300000>;
++					regulator-on-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-suspend-microvolt = <3300000>;
++					regulator-on-in-suspend;
++				};
++			};
++
++			v3v3: buck4 {
++				regulator-name = "v3v3";
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++				regulator-over-current-protection;
++				regulator-initial-mode = <0>;
++				lp-stop {
++					regulator-suspend-microvolt = <3300000>;
++					regulator-on-in-suspend;
++				};
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			ldo1_v1v8: ldo1 {
++				regulator-name = "ldo1_v1v8";
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-always-on;
++				interrupts = <IT_CURLIM_LDO1 0>;
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			ldo2_v2v8: ldo2 {
++				regulator-name = "ldo2_v2v8";
++				regulator-min-microvolt = <2800000>;
++				regulator-max-microvolt = <2800000>;
++				regulator-always-on;
++				interrupts = <IT_CURLIM_LDO2 0>;
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vtt_ddr: ldo3 {
++				regulator-name = "vtt_ddr";
++				regulator-always-on;
++				regulator-over-current-protection;
++				st,regulator-sink-source;
++				lp-stop {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_usb: ldo4 {
++				regulator-name = "vdd_usb";
++				interrupts = <IT_CURLIM_LDO4 0>;
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdda: ldo5 {
++				regulator-name = "vdda";
++				regulator-min-microvolt = <2900000>;
++				regulator-max-microvolt = <2900000>;
++				interrupts = <IT_CURLIM_LDO5 0>;
++				st,regulator-warm-boot-on;
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			ldo6_v1v2: ldo6 {
++				regulator-name = "ldo6_v1v2";
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1200000>;
++				regulator-always-on;
++				interrupts = <IT_CURLIM_LDO6 0>;
++				standby-ddr-sr {
++					regulator-off-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vref_ddr: vref_ddr {
++				regulator-name = "vref_ddr";
++				regulator-always-on;
++				lp-stop {
++					regulator-on-in-suspend;
++				};
++				standby-ddr-sr {
++					regulator-on-in-suspend;
++				};
++				standby-ddr-off {
++					regulator-off-in-suspend;
++				};
++			};
++
++			bst_out: boost {
++				regulator-name = "bst_out";
++				interrupts = <IT_OCP_BOOST 0>;
++				regulator-always-on;
++			};
++
++			vbus_otg: pwr_sw1 {
++				regulator-name = "vbus_otg";
++				interrupts = <IT_OCP_OTG 0>;
++			};
++
++			vbus_sw: pwr_sw2 {
++				regulator-name = "vbus_sw";
++				interrupts = <IT_OCP_SWOUT 0>;
++				regulator-active-discharge = <1>;
++			};
++		};
++
++		onkey {
++			compatible = "st,stpmic1-onkey";
++			interrupts = <IT_PONKEY_F 0>, <IT_PONKEY_R 0>;
++			interrupt-names = "onkey-falling", "onkey-rising";
++			power-off-time-sec = <10>;
++			status = "disabled";
++		};
++
++		watchdog {
++			compatible = "st,stpmic1-wdt";
++			status = "disabled";
++		};
++	};
++};
++
++&iwdg1 {
++	status = "okay";
++	timeout-sec = <32>;
++};
++
++&pwr_regulators {
++	status = "okay";
++	system_suspend_supported_soc_modes = <
++		STM32_PM_CSLEEP_RUN
++		STM32_PM_CSTOP_ALLOW_LP_STOP
++		STM32_PM_CSTOP_ALLOW_STANDBY_DDR_SR
++	>;
++	system_off_soc_mode = <STM32_PM_CSTOP_ALLOW_STANDBY_DDR_OFF>;
++	vdd-supply = <&vdd>;
++	vdd_3v3_usbfs-supply = <&vdd_usb>;
++};
++
++&rcc {
++	compatible = "st,stm32mp1-rcc-secure";
++	status = "okay";
++
++	st,clksrc = <
++		CLK_CKPER_HSE
++		CLK_SDMMC12_PLL4P
++		CLK_STGEN_HSE
++		CLK_USBPHY_HSE
++		CLK_I2C46_HSI
++		CLK_USBO_USBPHY
++		CLK_UART24_HSI
++		CLK_MPU_PLL1P
++		CLK_AXI_PLL2P
++		CLK_MCU_PLL3P
++		CLK_RTC_LSI
++		CLK_ETH_PLL3Q
++	>;
++	st,clkdiv = <
++		DIV(DIV_MPU, 1)
++		DIV(DIV_AXI, 0)
++		DIV(DIV_MCU, 0)
++		DIV(DIV_APB1, 1)
++		DIV(DIV_APB2, 1)
++		DIV(DIV_APB3, 1)
++		DIV(DIV_APB4, 1)
++		DIV(DIV_APB5, 2)
++		DIV(DIV_RTC, 0)
++		DIV(DIV_MCO1, 0)
++		DIV(DIV_MCO2, 0)
++	>;
++	st,pll_vco {
++		pll2_vco_1066Mhz: pll2-vco-1066Mhz {
++			src = < CLK_PLL12_HSE >;
++			divmn = < 2 65 >;
++			frac = < 0x1400 >;
++		};
++		pll3_vco_625Mhz: pll3-vco-625Mhz {
++			src = < CLK_PLL3_HSE >;
++			divmn = < 2 77 >;
++			frac = < 0x400 >;
++		};
++		pll4_vco_594Mhz: pll4-vco-594Mhz {
++			src = < CLK_PLL4_HSE >;
++			divmn = < 3 98 >;
++		};
++	};
++
++	pll2:st,pll@1 {
++		compatible = "st,stm32mp1-pll";
++		reg = <1>;
++
++		st,pll = < &pll2_cfg1 >;
++
++		pll2_cfg1: pll2_cfg1 {
++			st,pll_vco = < &pll2_vco_1066Mhz >;
++			st,pll_div_pqr = < 1 0 0 >;
++		};
++	};
++
++	pll3:st,pll@2 {
++		compatible = "st,stm32mp1-pll";
++		reg = <2>;
++
++		st,pll = < &pll3_cfg1 >;
++
++		pll3_cfg1: pll3_cfg1 {
++			st,pll_vco = < &pll3_vco_625Mhz >;
++			st,pll_div_pqr = < 2 4 24 >;
++		};
++	};
++
++	pll4:st,pll@3 {
++		compatible = "st,stm32mp1-pll";
++		reg = <3>;
++
++		st,pll = < &pll4_cfg1 >;
++
++		pll4_cfg1: pll4_cfg1 {
++			st,pll_vco = < &pll4_vco_594Mhz >;
++			st,pll_div_pqr = < 5 7 17 >;
++		};
++	};
++};
++
++&rng1 {
++	status = "okay";
++};
++
++&rtc {
++	status = "okay";
++};
++
++&tamp {
++	status = "okay";
++	st,tamp-passive-nb-sample = <4>;
++	st,tamp-passive-sample-clk-div = <16384>;
++};
++
++&cpu0 {
++	cpu-supply = <&vddcore>;
++};
++
++&cpu1 {
++	cpu-supply = <&vddcore>;
++};
++
++&gpu {
++	contiguous-area = <&gpu_reserved>;
++};
++
++&osc_calibration {
++	csi-calibration {
++		status = "okay";
++	};
++
++	hsi-calibration {
++		status = "okay";
++	};
++};
++
++&timers15 {
++	status = "okay";
++
++	counter {
++		status = "okay";
++	};
++};
++
++&uart4 {
++	pinctrl-names = "default", "sleep", "idle";
++	pinctrl-0 = <&uart4_pins_mx>;
++	pinctrl-1 = <&uart4_sleep_pins_mx>;
++	pinctrl-2 = <&uart4_idle_pins_mx>;
++	/delete-property/dmas;
++	/delete-property/dma-names;
++	status = "okay";
++};
++
++&i2s2 {
++	clocks = <&rcc SPI2>, <&rcc SPI2_K>, <&rcc PLL3_Q>, <&rcc PLL3_R>;
++	clock-names = "pclk", "i2sclk", "x8k", "x11k";
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&i2s2_pins_mx>;
++	pinctrl-1 = <&i2s2_sleep_pins_mx>;
++	status = "disabled";
++};
++
++&ipcc {
++	status = "disabled";
++};
++
++&i2c1{
++	status = "disabled";
++};
++
++&ltdc{
++	status = "disabled";
++};
++
++&dsi {
++	status = "disabled";
++};
++
++&adc {
++	vdd-supply = <&vdd>;
++	vdda-supply = <&vdda>;
++	vref-supply = <&vdda>;
++	status = "disabled";
++	adc1: adc@0 {
++		st,min-sample-time-nsecs = <5000>;
++		st,adc-channels = <0 1>;
++		status = "disabled";
++	};
++
++	adc_temp: temp {
++		status = "disabled";
++	};
++};
++
++&cec {
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&cec_pins_mx>;
++	pinctrl-1 = <&cec_sleep_pins_mx>;
++	status = "disabled";
++};
++
++&crc1 {
++	status = "disabled";
++};
++
++&dts {
++	status = "disabled";
++};
++
++&ethernet0{
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&eth1_pins_mx>;
++	pinctrl-1 = <&eth1_sleep_pins_mx>;
++	status = "disabled";
++
++	//st,eth-clk-sel;
++	st,ext-phyclk;
++	phy-mode = "rgmii-id";
++	max-speed = <1000>;
++	phy-handle = <&phy0>;
++
++	mdio0 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "snps,dwmac-mdio";
++		phy0: ethernet-phy@0 {
++			reg = <3>;
++		};
++	};
++};
++
++&usbotg_hs {
++	phys = <&usbphyc_port1 0>;
++	phy-names = "usb2-phy";
++	usb-role-switch;
++	status = "disabled";
++
++	port {
++		usbotg_hs_ep: endpoint {
++			remote-endpoint = <&con_usbotg_hs_ep>;
++		};
++	};
++};
++
++&usbphyc {
++	status = "disabled";
++};
++
++&m4_rproc {
++	memory-region = <&retram>, <&mcusram1>, <&mcusram2>, <&mcusram3>;
++	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>, <&ipcc 3>;
++	mbox-names = "vq0", "vq1", "shutdown", "detach";
++	interrupt-parent = <&exti>;
++	interrupts = <68 1>;
++	status = "disabled";
++};
+diff --git a/core/arch/arm/plat-stm32mp1/conf.mk b/core/arch/arm/plat-stm32mp1/conf.mk
+index a7b442764..055abead8 100644
+--- a/core/arch/arm/plat-stm32mp1/conf.mk
++++ b/core/arch/arm/plat-stm32mp1/conf.mk
+@@ -14,13 +14,15 @@ flavor_dts_file-157F_DK2 = stm32mp157f-dk2.dts
+ flavor_dts_file-157F_ED1 = stm32mp157f-ed1.dts
+ flavor_dts_file-157F_EV1 = stm32mp157f-ev1.dts
+ flavor_dts_file-157F_OCT_BRK = stm32mp157f-osd32mp1-brk.dts
++flavor_dts_file-157C_OCT_RED = stm32mp157c-osd32mp1-red.dts
+ 
+ flavor_dts_file-135F_DK = stm32mp135f-dk.dts
+ 
+ flavorlist-cryp-512M = $(flavor_dts_file-157C_DK2) \
+ 		       $(flavor_dts_file-157F_DK2) \
+ 		       $(flavor_dts_file-135F_DK) \
+-			   $(flavor_dts_file-157F_OCT_BRK)
++			   $(flavor_dts_file-157F_OCT_BRK) \
++			   $(flavor_dts_file-157C_OCT_RED)
+ 
+ flavorlist-no_cryp-512M = $(flavor_dts_file-157A_DK1) \
+ 			  $(flavor_dts_file-157D_DK1)
+@@ -60,7 +62,8 @@ flavorlist-MP15 = $(flavor_dts_file-157A_DHCOR_AVENGER96) \
+ 		  $(flavor_dts_file-157F_DK2) \
+ 		  $(flavor_dts_file-157F_ED1) \
+ 		  $(flavor_dts_file-157F_EV1) \
+-		  $(flavor_dts_file-157F_OCT_BRK)
++		  $(flavor_dts_file-157F_OCT_BRK) \
++		  $(flavor_dts_file-157C_OCT_RED)
+ 
+ flavorlist-MP13 = $(flavor_dts_file-135F_DK)
+ 
