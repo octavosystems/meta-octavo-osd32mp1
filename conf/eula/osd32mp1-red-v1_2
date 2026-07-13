@@ -1,21 +1,27 @@
-SLA0048 Rev4/March 2018
+SLA0048 Rev5/October 2025
 
-BY INSTALLING COPYING, DOWNLOADING, ACCESSING OR OTHERWISE USING THIS SOFTWARE PACKAGE OR ANY PART THEREOF (AND THE RELATED DOCUMENTATION) FROM STMICROELECTRONICS INTERNATIONAL N.V, SWISS BRANCH AND/OR ITS AFFILIATED COMPANIES (STMICROELECTRONICS), THE RECIPIENT, ON BEHALF OF HIMSELF OR HERSELF, OR ON BEHALF OF ANY ENTITY BY WHICH SUCH RECIPIENT IS EMPLOYED AND/OR ENGAGED AGREES TO BE BOUND BY THIS SOFTWARE PACKAGE LICENSE AGREEMENT.
+Software license agreement
 
-Under STMicroelectronics’ intellectual property rights and subject to applicable licensing terms for any third-party software incorporated in this software package and applicable Open Source Terms (as defined here below), the redistribution, reproduction and use in source and binary forms of the software package or any part thereof, with or without modification, are permitted provided that the following conditions are met:
-1. Redistribution of source code (modified or not) must retain any copyright notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form, except as embedded into microcontroller or microprocessor device manufactured by or for STMicroelectronics or a software update for such device, must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-3. Neither the name of STMicroelectronics nor the names of other contributors to this software package may be used to endorse or promote products derived from this software package or part thereof without specific written permission.
-4. This software package or any part thereof, including modifications and/or derivative works of this software package, must be used and execute solely and exclusively on or in combination with a microcontroller or a microprocessor devices manufactured by or for STMicroelectronics.
-5. No use, reproduction or redistribution of this software package partially or totally may be done in any manner that would subject this software package to any Open Source Terms (as defined below).
-6. Some portion of the software package may contain software subject to Open Source Terms (as defined below) applicable for each such portion (“Open Source Software”), as further specified in the software package. Such Open Source Software is supplied under the applicable Open Source Terms and is not subject to the terms and conditions of license hereunder. “Open Source Terms” shall mean any open source license which requires as part of distribution of software that the source code of such software is distributed therewith or otherwise made available, or open source license that substantially complies with the Open Source definition specified at www.opensource.org and any other comparable open source license such as for example GNU General Public License (GPL), Eclipse Public License (EPL), Apache Software License, BSD license and MIT license.
-7. This software package may also include third party software as expressly specified in the software package subject to specific license terms from such third parties. Such third party software is supplied under such specific license terms and is not subject to the terms and conditions of license hereunder. By installing copying, downloading, accessing or otherwise using this software package, the recipient agrees to be bound by such license terms with regard to such third party software.
-8. STMicroelectronics has no obligation to provide any maintenance, support or updates for the software package.
-9. The software package is and will remain the exclusive property of STMicroelectronics and its licensors. The recipient will not take any action that jeopardizes STMicroelectronics and its licensors' proprietary rights or acquire any rights in the software package, except the limited rights specified hereunder.
-10. The recipient shall comply with all applicable laws and regulations affecting the use of the software package or any part thereof including any applicable export control law or regulation.
-11. Redistribution and use of this software package partially or any part thereof other than as permitted under this license is void and will automatically terminate your rights under this license.
+__SOFTWARE PACKAGE LICENSE AGREEMENT (“AGREEMENT”)__
 
-THIS SOFTWARE PACKAGE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE PACKAGE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+BY CLICKING ON THE "I ACCEPT" BUTTON OR BY  UNZIPPING, INSTALLING, COPYING, DOWNLOADING, ACCESSING OR OTHERWISE USING THIS SOFTWARE PACKAGE OR ANY PART THEREOF, INCLUDING ANY RELATED DOCUMENTATION (collectively the “SOFTWARE PACKAGE”) FROM STMICROELECTRONICS INTERNATIONAL N.V, SWISS BRANCH AND/OR ITS AFFILIATED COMPANIES (collectively "STMICROELECTRONICS”), YOU (hereinafter referred also to as “THE RECIPIENT”), ON BEHALF OF YOURSELF, OR ON BEHALF OF ANY ENTITY BY WHICH YOU ARE EMPLOYED AND/OR ENGAGED, AGREE TO BE BOUND BY THIS AGREEMENT.
+
+Under STMICROELECTRONICS’ intellectual property rights and subject to  applicable licensing terms for any third-party software incorporated in the SOFTWARE PACKAGE and applicable Open Source Terms (as defined here below), the redistribution, reproduction and use in source and binary forms of the SOFTWARE PACKAGE or any part thereof, with or without modification, are permitted provided that the following conditions are met:
+1. Redistribution of source code (modified or not) must retain any copyright notice accompanying the SOFTWARE PACKAGE, this list of conditions and the disclaimer below.
+2. Redistributions in binary form, except as embedded into a processing unit device manufactured by or for STMicroelectronics or a software update for any such device, must reproduce the accompanying copyright notice, this list of conditions and the below disclaimer in capital type, in the documentation and/or other materials provided with the distribution.
+3. Neither the name of STMicroelectronics nor the names of other contributors to the SOFTWARE PACKAGE may be used to endorse or promote products derived from the SOFTWARE PACKAGE or part thereof without specific written permission.
+4. The SOFTWARE PACKAGE or any part thereof, including modifications and/or derivative works of the SOFTWARE PACKAGE, must be used and execute solely and exclusively on or in combination with a processing unit device manufactured by or for STMicroelectronics.
+5. No use, reproduction or redistribution of the SOFTWARE PACKAGE partially or totally may be done in any manner that would subject the SOFTWARE PACKAGE to any Open Source Terms (as defined below).
+6. Some portion of the SOFTWARE PACKAGE may contain software subject to Open Source Terms (as defined below) applicable for each such portion (“Open Source Software”), as further specified in the SOFTWARE PACKAGE. Such Open Source Software is supplied under the applicable Open Source Terms and is not subject to the terms and conditions of this AGREEMENT. “Open Source Terms” shall mean any open source license which requires as part of distribution of software that the source code of such software is distributed therewith or otherwise made available, or open source license that substantially complies with the Open Source definition specified at www.opensource.org and any other comparable open source license such as for example GNU General Public License (GPL), Eclipse Public License (EPL), Apache Software License, BSD license and MIT license.
+7. The SOFTWARE PACKAGE may also include third party software as expressly specified in the SOFTWARE PACKAGE subject to specific license terms from such third parties. Such third-party software is supplied under such specific license terms and is not subject to the terms and conditions of this AGREEMENT. By installing copying, downloading, accessing or otherwise using the SOFTWARE PACKAGE, the RECIPIENT agrees to be bound by such license terms with regard to such third-party software.
+8. STMicroelectronics has no obligation to provide any maintenance, support or updates for the SOFTWARE PACKAGE.
+9. The SOFTWARE PACKAGE is and will remain the exclusive property of STMicroelectronics and its licensors. The RECIPIENT will not take any action that jeopardizes STMicroelectronics and its licensors' proprietary rights or acquire any rights in the SOFTWARE PACKAGE, except the limited rights specified hereunder.
+10. The RECIPIENT shall comply with all applicable laws and regulations affecting the use of the SOFTWARE PACKAGE or any part thereof including any applicable export control law or regulation.
+11. Redistribution and use of the SOFTWARE PACKAGE partially or any part thereof other than as permitted under this AGREEMENT is void and will automatically terminate RECIPIENT’s rights under this AGREEMENT.
+12. The RECIPIENT shall be solely liable to determine and verify that the SOFTWARE PACKAGE is fit for the RECIPIENT intended use, environment or application and comply with all regulatory, safety and security related requirements concerning any use.
+
+DISCLAIMER:
+THE SOFTWARE PACKAGE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THE SOFTWARE PACKAGE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 EXCEPT AS EXPRESSLY PERMITTED HEREUNDER AND SUBJECT TO THE APPLICABLE LICENSING TERMS FOR ANY THIRD-PARTY SOFTWARE INCORPORATED IN THE SOFTWARE PACKAGE AND OPEN SOURCE TERMS AS APPLICABLE, NO LICENSE OR OTHER RIGHTS, WHETHER EXPRESS OR IMPLIED, ARE GRANTED UNDER ANY PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF STMICROELECTRONICS OR ANY THIRD PARTY.
 
 ###############################################################################
@@ -95,3 +101,344 @@ Licensee shall not: (i) use, license, sell or otherwise distribute the Software 
 BROADCOM SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A SPECIFIC PURPOSE, OR NONINFRINGEMENT CONCERNING THE SOFTWARE OR ANY UPGRADES TO OR DOCUMENTATION FOR THE SOFTWARE. WITHOUT LIMITATION OF THE ABOVE, BROADCOM GRANTS NO WARRANTY THAT THE SOFTWARE IS ERROR-FREE OR WILL OPERATE WITHOUT INTERRUPTION, AND GRANTS NO WARRANTY REGARDING ITS USE OR THE RESULTS THEREFROM INCLUDING, WITHOUT LIMITATION, ITS CORRECTNESS, ACCURACY, OR RELIABILITY. TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL BROADCOM OR ANY OF ITS LICENSORS HAVE ANY LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER FOR BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE) OR OTHERWISE, ARISING OUT OF THIS AGREEMENT OR USE, REPRODUCTION, OR DISTRIBUTION OF THE SOFTWARE, INCLUDING BUT NOT LIMITED TO LOSS OF DATA AND LOSS OF PROFITS, EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THESE LIMITATIONS SHALL APPLY NOTWITHSTANDING ANY FAILURE OF ESSENTIAL PURPOSE OF ANY LIMITED REMEDY.
 
 5.  Export Laws.  LICENSEE UNDERSTANDS AND AGREES THAT THE SOFTWARE IS SUBJECT TO UNITED STATES AND OTHER APPLICABLE EXPORT-RELATED LAWS AND REGULATIONS AND THAT LICENSEE MAY NOT EXPORT, RE-EXPORT OR TRANSFER THE SOFTWARE OR ANY DIRECT PRODUCT OF THE SOFTWARE EXCEPT AS PERMITTED UNDER THOSE LAWS. WITHOUT LIMITING THE FOREGOING, EXPORT, RE-EXPORT, OR TRANSFER OF THE SOFTWARE TO CUBA, IRAN, NORTH KOREA, SUDAN, AND SYRIA IS PROHIBITED.
+
+###############################################################################
+
+List of Packages:
+  alsa-state-stm32mp1              1.0                      MIT
+  alsa-state-stm32mp2              1.0                      MIT
+  dtbo-stm32mp21x                  1.0                      GPL-2.0-only | BSD-3-Clause
+  fip-stm32mp                      6.0                      BSD-3-Clause
+  gcnano-driver-stm32mp            6.4.21-r1                GPL-1.0-only & MIT
+  gcnano-userland-multi-binary-stm32mp 6.4.21+20250226          Proprietary
+  gdb-stm32mp-addons               1.0                      BSD-3-Clause
+  linux-examples-stm32mp1          5.4+                     MIT
+  linux-firmware-addons-bcm43xx    6.0                      Cypress-bcm43xx
+  linux-stm32mp                    6.6.129-stm32mp-r3.1     GPL-2.0-only
+  m0projects-stm32mp2              1.3.1                    Apache-2.0 & MIT & BSD-3-Clause
+  m33projects-stm32mp2             1.3.1                    Apache-2.0 & MIT & BSD-3-Clause
+  m33tdprojects-starter-stm32mp2   1.3.1                    Apache-2.0 & MIT & BSD-3-Clause
+  optee-os-stm32mp                 4.0.0-stm32mp-r3.1       BSD-2-Clause & BSD-3-Clause
+  rpmsg-tools                      1.0                      BSD-3-Clause
+  stm32-ddr-tools                  1.0                      MIT
+  stm32mp-extlinux                 3.1.2                    MIT
+  tf-a-stm32mp                     v2.10.24-stm32mp-r3.1    BSD-3-Clause
+  tf-m-stm32mp                     v2.1.4-stm32mp-r2.1      BSD-3-Clause & Apache-2.0
+  u-boot-stm32mp-splash            2018.11                  Proprietary
+  u-boot-stm32mp                   v2023.10-stm32mp-r3.1    GPL-2.0-or-later
+  u-boot-tools-stm32mp             v2023.10-stm32mp-r3.1    GPL-2.0-or-later
+
+###############################################################################
+
+List of Packages:
+  adwaita-icon-theme               45.0                     LGPL-3.0-only | CC-BY-SA-3.0
+  ai-hand-char-reco-launcher       2.1                      GPL-2.0-only & BSD-3-Clause
+  alsa-lib                         1.2.11                   LGPL-2.1-only & GPL-2.0-or-later
+  alsa-plugins                     1.2.7.1                  LGPL-2.1-only & GPL-2.0-or-later
+  alsa-state                       0.2.0                    MIT & GPL-2.0-or-later
+  alsa-state-script                1.0                      MIT
+  alsa-topology-conf               1.2.5.1                  BSD-3-Clause
+  alsa-ucm-conf                    1.2.11                   BSD-3-Clause
+  alsa-utils                       1.2.11                   GPL-2.0-only
+  apt                              2.6.1                    GPL-2.0-or-later
+  apt-openstlinux                  6.2                      MIT
+  at-spi2-core                     2.50.1                   LGPL-2.1-or-later
+  attr                             2.5.1                    LGPL-2.1-or-later
+  avahi                            0.8                      LGPL-2.1-or-later
+  babeltrace                       1.5.11                   MIT & GPL-2.0-only & LGPL-2.1-only
+  babeltrace2                      2.0.6                    MIT & GPL-2.0-only & LGPL-2.1-only & BSD-2-Clause
+  base-files                       3.0.14                   GPL-2.0-only
+  base-passwd                      3.6.3                    GPL-2.0-only
+  bash                             5.2.21                   GPL-3.0-or-later
+  bc                               1.07.1                   GPL-3.0-or-later
+  blktool                          4-7.1                    GPL-2.0-or-later
+  blktrace                         1.3.0+git                GPL-2.0-only
+  bluetooth-suspend                1.0                      MIT
+  bluez5                           5.72                     GPL-2.0-or-later & LGPL-2.1-or-later
+  boost                            1.84.0                   BSL-1.0 & MIT & Python-2.0
+  bridge-utils                     1.7.1                    GPL-2.0-only
+  build-info-openstlinux           1.0                      MIT
+  busybox                          1.36.1                   GPL-2.0-only & bzip2-1.0.4
+  bzip2                            1.0.8                    bzip2-1.0.6
+  ca-certificates                  20250419                 GPL-2.0-or-later & MPL-2.0
+  cairo                            1.18.0                   MPL-1.1 | LGPL-2.1-only
+  can-utils                        2023.03                  GPL-2.0-only & BSD-3-Clause
+  ckermit                          302                      BSD-3-Clause
+  coreutils                        9.4                      GPL-3.0-or-later
+  cpufrequtils                     008                      GPL-2.0-only
+  cracklib                         2.9.11                   LGPL-2.1-or-later
+  cryptodev-module                 1.14                     GPL-2.0-only
+  curl                             8.7.1                    curl
+  db                               5.3.28                   Sleepycat
+  dbus                             1.14.10                  AFL-2.1 | GPL-2.0-or-later
+  dcmipp-isp-ctrl                  5.1+git-31551e74         BSD-3-Clause
+  demo-application-3d-cube         3.0                      BSD-3-Clause
+  demo-application-bluetooth       2.1                      BSD-3-Clause
+  demo-application-camera          2.0                      BSD-3-Clause
+  demo-application-netdata-hotspot 2.0                      BSD-3-Clause
+  demo-application-video           2.0                      BSD-3-Clause
+  demo-gtk                         2.2                      BSD-3-Clause
+  demo-hotspot-wifi                1.0                      MIT
+  demo-launcher                    2.3                      BSD-3-Clause
+  desktop-file-utils               0.27                     GPL-2.0-or-later
+  dosfstools                       4.2                      GPL-3.0-only
+  dpkg                             1.22.0                   GPL-2.0-or-later
+  dropbear                         2022.83                  MIT & BSD-3-Clause & BSD-2-Clause & PD
+  duktape                          2.7.0                    MIT
+  e2fsprogs                        1.47.0                   GPL-2.0-only & LGPL-2.0-only & BSD-3-Clause & MIT
+  elfutils                         0.191                    GPL-3.0-or-later
+  ethtool                          6.7                      GPL-2.0-or-later
+  event-gtk-player                 5.0+git-e2f4fc8c         GPL-2.0-or-later
+  evtest                           1.36                     GPL-2.0-only
+  expat                            2.6.4                    MIT
+  faac                             1.29.9.2                 LGPL-2.0-or-later
+  fb-test                          1.1.0                    GPL-2.0-only
+  fdk-aac                          2.0.2                    Fraunhofer_FDK_AAC_Codec_Library_for_Android
+  ffmpeg                           6.1.3                    LGPL-2.1-or-later
+  fftw                             3.3.10                   GPL-2.0-only
+  file                             5.45                     BSD-2-Clause
+  flac                             1.4.3                    GFDL-1.2 & GPL-2.0-or-later & LGPL-2.1-or-later & BSD-3-Clause
+  fontconfig                       2.15.0                   MIT & MIT & PD
+  freetype                         2.13.2                   (FTL | GPL-2.0-or-later) & MIT
+  fribidi                          1.0.14                   LGPL-2.1-or-later
+  gcc-runtime                      13.4.0                   GPL-3.0-with-GCC-exception
+  gdb                              14.2                     GPL-2.0-only & GPL-3.0-only & LGPL-2.0-only & LGPL-3.0-only
+  gdk-pixbuf                       2.42.12                  LGPL-2.1-or-later
+  glib-2.0                         2.78.6                   LGPL-2.1-or-later & BSD-3-Clause & PD
+  glib-networking                  2.78.1                   LGPL-2.1-or-later
+  glibc                            2.39+git                 GPL-2.0-only & LGPL-2.1-or-later
+  glibc-locale                     2.39+git                 GPL-2.0-only & LGPL-2.1-or-later
+  glmark2                          2023.01                  GPL-3.0-or-later & SGI-1
+  gmp                              6.3.0                    GPL-2.0-or-later | LGPL-3.0-or-later
+  gnupg                            2.4.8                    GPL-3.0-only & LGPL-3.0-only
+  gnutls                           3.8.4                    LGPL-2.1-or-later
+  gobject-introspection            1.78.1                   LGPL-2.0-or-later & GPL-2.0-or-later & MIT
+  gpio-udev                        1.0                      GPL-2.0-only
+  gptfdisk                         1.0.9                    GPL-2.0-only
+  grep                             3.11                     GPL-3.0-only
+  gstreamer1.0                     1.22.12                  LGPL-2.1-or-later
+  gstreamer1.0-libav               1.22.12                  LGPL-2.1-or-later
+  gstreamer1.0-plugins-bad         1.22.12                  LGPL-2.1-or-later
+  gstreamer1.0-plugins-base        1.22.12                  LGPL-2.1-or-later
+  gstreamer1.0-plugins-good        1.22.12                  LGPL-2.1-or-later
+  gstreamer1.0-plugins-ugly        1.22.12                  GPL-2.0-or-later
+  gstreamer1.0-python              1.22.12                  LGPL-2.1-or-later
+  gstreamer1.0-rtsp-server         1.22.12                  LGPL-2.1-or-later
+  gtk+3                            3.24.41                  LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-or-later
+  harfbuzz                         8.3.0                    MIT
+  hdparm                           9.65                     BSD-2-Clause & hdparm
+  hicolor-icon-theme               0.17                     GPL-2.0-only
+  hostapd                          2.10                     BSD-3-Clause
+  i2c-tools                        4.3                      GPL-2.0-or-later
+  icu                              74-2                     ICU
+  infos-openstlinux                1.1                      GPL-2.0-or-later
+  initramfs-framework              1.0                      MIT
+  initrd-boot                      1.0                      MIT
+  installer-apps                   1.0                      BSD-3-Clause
+  installer-gtk                    1.0                      BSD-3-Clause
+  iproute2                         6.7.0                    GPL-2.0-or-later
+  iptables                         1.8.10                   GPL-2.0-or-later
+  iputils                          20240117                 BSD-3-Clause & GPL-2.0-or-later
+  iw                               6.7                      ISC
+  jack                             1.9.22                   GPL-2.0-only & GPL-2.0-or-later & LGPL-2.1-or-later
+  json-c                           0.17                     MIT
+  json-glib                        1.8.0                    LGPL-2.1-only
+  kbd                              2.6.4                    GPL-2.0-or-later & LGPL-2.0-or-later
+  kmod                             31                       GPL-2.0-or-later & LGPL-2.1-or-later
+  kmscube                          0.0.1+git                MIT
+  lame                             3.100                    LGPL-2.0-or-later
+  liba52                           0.7.4                    GPL-2.0-or-later
+  libaio                           0.3.113                  LGPL-2.1-or-later
+  libassuan                        2.5.6                    LGPL-2.1-or-later
+  libcamera-stm32mp                0.3.0-stm32mp.2          GPL-2.0-or-later & LGPL-2.1-or-later
+  libcap                           2.69                     BSD-3-Clause | GPL-2.0-only
+  libcap-ng                        0.8.5                    GPL-2.0-or-later & LGPL-2.1-or-later
+  libdaemon                        0.14                     LGPL-2.1-or-later
+  libdazzle                        3.44.0                   GPL-3.0-or-later
+  libdrm                           2.4.120                  MIT
+  libedit                          20230828-3.1             BSD-3-Clause
+  libepoxy                         1.5.10                   MIT
+  liberation-fonts                 2.1.5                    OFL-1.1
+  libevdev                         1.13.1                   MIT
+  libevent                         2.1.12                   BSD-3-Clause & MIT
+  libffi                           3.4.6                    MIT
+  libgcc                           13.4.0                   GPL-3.0-with-GCC-exception
+  libgcrypt                        1.10.3                   LGPL-2.1-or-later
+  libgpg-error                     1.48                     GPL-2.0-or-later & LGPL-2.1-or-later
+  libgpiod                         2.1.3                    GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0
+  libgudev                         238                      LGPL-2.1-only
+  libidn2                          2.3.7                    (GPL-2.0-or-later | LGPL-3.0-only) & Unicode-DFS-2016
+  libiio                           0.25                     LGPL-2.1-or-later
+  libinput                         1.25.0                   MIT
+  libjpeg-turbo                    3.0.1                    IJG & BSD-3-Clause & Zlib
+  libksba                          1.6.6                    GPL-2.0-or-later | LGPL-3.0-or-later
+  libmd                            1.1.0                    BSD-3-Clause & BSD-2-Clause
+  libmnl                           1.0.5                    LGPL-2.1-or-later
+  libnl                            3.9.0                    LGPL-2.1-only
+  libnss-mdns                      0.15.1                   LGPL-2.1-or-later
+  libogg                           1.3.5                    BSD-3-Clause
+  libopencsd                       1.4.0                    BSD-3-Clause
+  libopus                          1.5.2                    BSD-3-Clause
+  libpam                           1.5.3                    GPL-2.0-or-later | BSD-3-Clause
+  libpcap                          1.10.4                   BSD-3-Clause
+  libpcre2                         10.43                    BSD-3-Clause
+  libpcre                          8.45                     BSD-3-Clause
+  libpng                           1.6.42                   Libpng
+  libpsl                           0.21.5                   MIT
+  librsvg                          2.57.1                   LGPL-2.1-or-later
+  libsamplerate0                   0.2.2                    BSD-2-Clause
+  libsdl2                          2.30.1                   Zlib & BSD-2-Clause
+  libsdl2-image                    2.0.5                    Zlib
+  libserialport                    0.1.1                    LGPL-3.0-or-later
+  libsndfile1                      1.2.2                    LGPL-2.1-only
+  libsoup                          3.4.4                    LGPL-2.0-only
+  libtasn1                         4.20.0                   LGPL-2.1-or-later
+  libtheora                        1.1.1                    BSD-3-Clause
+  libtirpc                         1.3.4                    BSD-3-Clause
+  libunistring                     1.2                      LGPL-3.0-or-later | GPL-2.0-or-later
+  libunwind                        1.6.2                    MIT
+  libusb1                          1.0.27                   LGPL-2.1-or-later
+  libuv                            1.48.0                   MIT
+  libvorbis                        1.3.7                    BSD-3-Clause
+  libwebp                          1.3.2                    BSD-3-Clause
+  libx11-compose-data              1.8.4                    MIT & BSD-1-Clause & HPND & HPND-sell-variant & ISC
+  libxcrypt                        4.4.36                   LGPL-2.1-only
+  libxkbcommon                     1.6.0                    MIT & MIT
+  libxml2                          2.12.10                  MIT
+  libyaml                          0.2.5                    MIT
+  lmsensors                        3.6.0                    GPL-2.0-or-later & LGPL-2.1-or-later
+  lmsensors-config                 1.0                      MIT
+  lrzsz                            0.12.20                  GPL-2.0-or-later
+  lz4                              1.9.4                    BSD-2-Clause | GPL-2.0-only
+  lzlib                            1.14                     BSD-2-Clause
+  lzo                              2.10                     GPL-2.0-or-later
+  memtester                        4.6.0                    GPL-2.0-only
+  minicom                          2.9                      GPL-2.0-or-later
+  mmc-utils                        0.1+git                  GPL-2.0-only
+  mpeg2dec                         0.5.1                    GPL-2.0-or-later
+  mpg123                           1.32.10                  LGPL-2.1-only
+  mtdev                            1.1.6                    MIT
+  mtd-utils                        2.1.6                    GPL-2.0-or-later
+  ncurses                          6.4                      MIT
+  ne10                             1.2.1+git                BSD-3-Clause
+  netbase                          6.4                      GPL-2.0-only
+  netdata                          1.44.3                   GPL-3.0-only
+  nettle                           3.9.1                    LGPL-3.0-or-later | GPL-2.0-or-later
+  nghttp2                          1.61.0                   MIT
+  npth                             1.6                      LGPL-2.0-or-later
+  ntp                              4.2.8p17                 NTP
+  numactl                          2.0.18                   GPL-2.0-only & LGPL-2.1-only
+  openssh                          9.6p1                    BSD-2-Clause & BSD-3-Clause & ISC & MIT
+  openssl                          3.2.6                    Apache-2.0
+  opkg-utils                       0.6.3                    GPL-2.0-or-later
+  optee-client                     4.0.0+git                BSD-2-Clause
+  optee-stm32mp-addons             4.0.1-calibration-       BSD-3-Clause
+  optee-test                       4.0.0+git                BSD-2-Clause & GPL-2.0-only
+  orc                              0.4.40                   BSD-2-Clause & BSD-3-Clause
+  os-release                       1.0                      MIT
+  packagegroup-base                1.0                      MIT
+  packagegroup-core-boot           1.0                      MIT
+  packagegroup-core-eclipse-debug  1.0                      MIT
+  packagegroup-core-full-cmdline   1.0                      MIT
+  packagegroup-core-ssh-dropbear   1.0                      MIT
+  packagegroup-core-tools-profile  1.0                      MIT
+  packagegroup-framework-core      1.0                      MIT
+  packagegroup-framework-core-base 1.0                      MIT
+  packagegroup-framework-core-extra 1.0                      MIT
+  packagegroup-framework-tools     1.0                      MIT
+  packagegroup-framework-tools-base 1.0                      MIT
+  packagegroup-gstreamer1-0        1.0                      LGPL-2.0-or-later
+  packagegroup-optee-core          1.0                      LGPL-2.0-or-later
+  packagegroup-optee-test          1.0                      LGPL-2.0-or-later
+  packagegroup-st-demo             1.0                      MIT
+  pango                            1.52.1                   LGPL-2.0-or-later
+  pciutils                         3.11.1                   GPL-2.0-or-later
+  perf                             1.0                      GPL-2.0-only
+  perl                             5.38.4                   Artistic-1.0 | GPL-1.0-or-later
+  pinentry                         1.2.1                    GPL-2.0-only
+  pipewire                         1.2.3                    MIT & LGPL-2.1-or-later & GPL-2.0-only
+  pixman                           0.42.2                   MIT & PD
+  polkit                           124                      LGPL-2.0-or-later
+  popt                             1.19                     MIT
+  powertop                         2.15                     GPL-2.0-only
+  procps                           4.0.4                    GPL-2.0-or-later & LGPL-2.0-or-later
+  psplash-drm                      1.0                      MIT
+  pulseaudio                       17.0                     LGPL-2.1-or-later & MIT & BSD-3-Clause
+  python3                          3.12.12                  PSF-2.0
+  python3-dateutil                 2.9.0                    BSD-3-Clause & Apache-2.0
+  python3-distutils-extra          2.39                     GPL-2.0-only
+  python3-evdev                    1.6.1                    BSD-3-Clause
+  python3-pexpect                  4.9.0                    ISC
+  python3-ptyprocess               0.7.0                    ISC
+  python3-pycairo                  1.26.0                   LGPL-2.1-only & MPL-1.1
+  python3-pygobject                3.46.0                   LGPL-2.1-only
+  python3-pyparsing                3.1.1                    MIT
+  python3-pyyaml                   6.0.1                    MIT
+  python3-setuptools               69.1.1                   MIT
+  python3-six                      1.16.0                   MIT
+  qrenc                            1.0                      LGPL-2.1-only
+  qrencode                         4.1.1                    LGPL-2.1-only
+  readline                         8.2                      GPL-3.0-or-later
+  resize-helper                    1.0                      GPL-2.0-or-later
+  rng-tools                        6.16                     GPL-2.0-only
+  rpcbind                          1.2.6                    BSD-3-Clause
+  rpmsg-tools                      1.0                      BSD-3-Clause
+  rt-tests                         2.6                      GPL-2.0-only & GPL-2.0-or-later
+  run-postinsts                    1.0                      MIT
+  sbc                              2.0                      LGPL-2.1-or-later
+  seatd                            0.8.0                    MIT
+  shadow                           4.14.2                   BSD-3-Clause
+  shadow-securetty                 4.6                      MIT
+  shared-mime-info                 2.4                      GPL-2.0-only
+  slang                            2.3.3                    GPL-2.0-only
+  speex                            1.2.1                    BSD-3-Clause
+  speexdsp                         1.2.1                    BSD-3-Clause
+  sqlite3                          3.45.3                   PD
+  st-hostname                      1.0                      BSD-3-Clause
+  st-initrd                        1.0                      MIT
+  stm32-ddr-tools                  1.0                      MIT
+  strace                           6.7                      LGPL-2.1-or-later & GPL-2.0-or-later
+  sudo                             1.9.17p1                 ISC & BSD-3-Clause & BSD-2-Clause & Zlib
+  sysfsutils                       2.1.1                    GPL-2.0-only
+  sysprof                          3.44.0                   GPL-3.0-or-later
+  sysstat                          12.7.5                   GPL-2.0-or-later
+  systemd                          255.21                   GPL-2.0-only & LGPL-2.1-or-later
+  systemd-compat-units             1.0                      MIT
+  systemd-conf                     1.0                      MIT
+  systemd-mount-partitions         1.0                      MIT
+  systemd-networkd-configuration   1.0                      MIT
+  systemd-serialgetty              1.0                      GPL-2.0-or-later
+  systemtap                        5.0                      GPL-2.0-only
+  taglib                           2.0.1                    LGPL-2.1-only | MPL-1.1
+  tar                              1.35                     GPL-3.0-only
+  tcf-agent                        1.8.0+git                EPL-1.0 | EDL-1.0
+  tcpdump                          4.99.4                   BSD-3-Clause
+  tiff                             4.6.0                    libtiff
+  tzdata                           2025b                    PD & BSD-3-Clause
+  u-boot-fw-config-stm32mp         2021.10                  MIT
+  uhubctl                          2.5.0                    GPL-2.0-only
+  update-rc.d                      0.8+git                  GPL-2.0-or-later
+  usbip                            1.0                      GPL-2.0-only
+  usbotg-gadget-config             1.0                      MIT
+  usbutils                         017                      GPL-2.0-or-later
+  userfs-cleanup-package           1.0                      BSD-3-Clause
+  util-linux                       2.39.3                   GPL-1.0-or-later & GPL-2.0-or-later & LGPL-2.1-or-later & BSD-2-Clause & BSD-3-Clause & BSD-4-Clause & MIT
+  util-linux-libuuid               2.39.3                   BSD-3-Clause
+  v4l-utils                        1.26.1+git               GPL-2.0-only & LGPL-2.1-only
+  volatile-binds                   1.0                      MIT
+  vulkan-loader                    1.3.275.0                Apache-2.0
+  wayland                          1.22.0                   MIT
+  wayland-utils                    1.2.0                    MIT
+  webrtc-audio-processing-1        1.3                      BSD-3-Clause
+  weston                           13.0.1                   MIT
+  weston-cube                      5.0+git-31551e74         MIT
+  weston-init                      1.0                      MIT
+  wget                             1.21.4                   GPL-3.0-only
+  wireless-regdb                   2025.10.07               ISC
+  wireplumber                      0.5.6                    MIT
+  wpa-supplicant                   2.10                     BSD-3-Clause
+  xkeyboard-config                 2.41                     MIT & MIT
+  xxhash                           0.8.2                    BSD-2-Clause & GPL-2.0-only
+  xz                               5.4.7                    PD & GPL-2.0-or-later
+  zlib                             1.3.1                    Zlib
+  zstd                             1.5.5                    BSD-3-Clause | GPL-2.0-only
