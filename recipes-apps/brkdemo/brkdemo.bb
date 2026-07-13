@@ -10,11 +10,14 @@ S = "${WORKDIR}"
 
 PACKAGES += "${PN}-userfs"
 
+RDEPENDS:${PN} += "${PN}-userfs"
+RDEPENDS:${PN}-userfs += "python3-core"
+
 do_install () {
 	install -d ${D}${prefix}/local/demo/LEDWebDemo
-	install -m 0755 brkLed.py ${D}${prefix}/local/demo/LEDWebDemo/brkLed.py
-	install -m 0755 ledTemplate.html ${D}${prefix}/local/demo/LEDWebDemo/ledTemplate.html
-	install -m 0755 LEDWebServer.py ${D}${prefix}/local/demo/LEDWebDemo/LEDWebServer.py
+	install -m 0755 ${S}/brkLed.py ${D}${prefix}/local/demo/LEDWebDemo/brkLed.py
+	install -m 0644 ${S}/ledTemplate.html ${D}${prefix}/local/demo/LEDWebDemo/ledTemplate.html
+	install -m 0755 ${S}/LEDWebServer.py ${D}${prefix}/local/demo/LEDWebDemo/LEDWebServer.py
 }
 
 FILES:${PN}-userfs += "${prefix}/local/demo/LEDWebDemo/brkLed.py \
